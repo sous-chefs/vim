@@ -17,7 +17,9 @@
 # limitations under the License.
 #
 
-default[:vim][:extra_packages]      = []
-default[:vim][:compile_from_source] = false
-default[:vim][:use_custom_settings] = false
+default[:vim][:settings][:source] = 'https://github.com/dkinzer/.vim.git'
+default[:vim][:settings][:ref] = 'master'
+default[:vim][:settings][:dir] = '.vim'
+default[:vim][:settings][:user] = 'vagrant'
+default[:vim][:settings][:home] = "/home/#{default[:vim][:settings][:user]}"
 

@@ -18,6 +18,6 @@
 #
 
 default[:vim][:extra_packages]      = []
-default[:vim][:compile_from_source] = false
+default[:vim][:install_method]      = 'package'
 default[:vim][:use_custom_settings] = false
 

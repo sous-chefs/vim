@@ -24,12 +24,12 @@ Attributes
 
 * `node[:vim][:extra_packages]` - An array of extra packages related to vim to install (like plugins). Empty array by default.
 
-* `node[:vim][:compile_from_source]` - If set to `true` will compile vim from source using a mercurial repository. This attribute is set to false by default.
+* `node[:vim][:install_method]` - Sets the install method, choose from the various install recipes. This attribute is set to 'package' by default.
 
 * `node[:vim][:use_custom_settings]` - If set to `true` will download some vim settings. This attribute is set to false by default.
 
 
-## Compile recipe attribues:
+## Compile recipe attributes:
 
 * `node[:vim][:compile][:source_path]` - The path were the vim source files will be stored (`/usr/local/src` by default).
 * `node[:vim][:compile][:source_url]` -  The url for the vim mercurial repository (this should not change any time soon).
@@ -39,7 +39,7 @@ Attributes
 * `node[:vim][:compile][:configuration]` - If you prefer to compile vim differently than the default you can override this configuration.
 
 
-## Settings attribues:
+## Settings attributes:
 
 * `node[:vim][:settings][:source]` - This is the url for the .vim source.
 * `node[:vim][:settings][:ref]` - This is just a ref in case master is not an option.

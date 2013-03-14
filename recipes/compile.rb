@@ -22,12 +22,7 @@ source_path           = node['vim']['compile']['source_path']
 source_url            = node['vim']['compile']['source_url']
 install_path          = "#{node['vim']['compile']['prefix']}/bin/vim"
 compile_configuration = node['vim']['compile']['configuration']
-
-if platform_family? "rhel"
-  dev_dependencies = node['vim']['compile']['centos_dependencies']
-else
-  dev_dependencies = node['vim']['compile']['dependencies']
-end
+dev_dependencies      = node['vim']['compile']['dependencies']
 
 dev_dependencies.each do |dependency|
   package dependency do

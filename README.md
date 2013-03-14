@@ -14,8 +14,7 @@ Requirements
 
 ## Dependencies:
 
-* The compile recipe uses the mercurial cookbook.
-* The settings recipe uses the git cookbook.
+* The source recipe uses the mercurial cookbook.
 
 Attributes
 ==========
@@ -26,8 +25,6 @@ Attributes
 
 * `node['vim']['install_method']` - Sets the install method, choose from the various install recipes. This attribute is set to 'package' by default.
 
-* `node['vim']['use_custom_settings']` - If set to `true` will download some vim settings. This attribute is set to false by default.
-
 
 ## Compile recipe attributes:
 
@@ -37,15 +34,6 @@ Attributes
 * `node['vim']['source']['centos_dependencies']` - These are the rhl and centos specific depencies needed for compiling vim. 
 * `node['vim']['source']['prefix']` - This is the path the vim bin will be placed, it's `/usr/local` 
 * `node['vim']['source']['configuration']` - If you prefer to compile vim differently than the default you can override this configuration.
-
-
-## Settings attributes:
-
-* `node['vim']['settings']['source']` - This is the url for the .vim source.
-* `node['vim']['settings']['ref']` - This is just a ref in case master is not an option.
-* `node['vim']['settings']['dir']` - This is the name of the dir for .vim (in windows it needs to be called vimfiles).
-* `node['vim']['settings']['user']` - This is the name of user that we will add this .vim to (it is set to the vagrant user by default).
-* `node['vim']['settings']['home']` - This is the path to the home directory of a user.
 
 Usage
 =====

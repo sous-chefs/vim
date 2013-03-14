@@ -31,12 +31,12 @@ Attributes
 
 ## Compile recipe attributes:
 
-* `node['vim']['compile']['source_path']` - The path were the vim source files will be stored (`/usr/local/src` by default).
-* `node['vim']['compile']['source_url']` -  The url for the vim mercurial repository (this should not change any time soon).
-* `node['vim']['compile']['dependencies']` - These are the non rhl specific devel dependencies for compiling vim.
-* `node['vim']['compile']['centos_dependencies']` - These are the rhl and centos specific depencies needed for compiling vim. 
-* `node['vim']['compile']['prefix']` - This is the path the vim bin will be placed, it's `/usr/local` 
-* `node['vim']['compile']['configuration']` - If you prefer to compile vim differently than the default you can override this configuration.
+* `node['vim']['source']['source_path']` - The path were the vim source files will be stored (`/usr/local/src` by default).
+* `node['vim']['source']['source_url']` -  The url for the vim mercurial repository (this should not change any time soon).
+* `node['vim']['source']['dependencies']` - These are the non rhl specific devel dependencies for compiling vim.
+* `node['vim']['source']['centos_dependencies']` - These are the rhl and centos specific depencies needed for compiling vim. 
+* `node['vim']['source']['prefix']` - This is the path the vim bin will be placed, it's `/usr/local` 
+* `node['vim']['source']['configuration']` - If you prefer to compile vim differently than the default you can override this configuration.
 
 
 ## Settings attributes:

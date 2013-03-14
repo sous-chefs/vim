@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-default[:vim][:settings][:source] = 'https://github.com/dkinzer/.vim.git'
-default[:vim][:settings][:ref] = 'master'
-default[:vim][:settings][:dir] = '.vim'
-default[:vim][:settings][:user] = 'vagrant'
-default[:vim][:settings][:home] = "/home/#{default[:vim][:settings][:user]}"
+default['vim']['settings']['source'] = 'https://github.com/dkinzer/.vim.git'
+default['vim']['settings']['ref'] = 'master'
+default['vim']['settings']['dir'] = '.vim'
+default['vim']['settings']['user'] = 'vagrant'
+default['vim']['settings']['home'] = "/home/#{default['vim']['settings']['user']}"
 

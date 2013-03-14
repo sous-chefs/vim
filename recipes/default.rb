@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-include_recipe "vim::#{node[:vim][:install_method]}"
+include_recipe "vim::#{node['vim']['install_method']}"
 
-if node[:vim][:use_custom_settings]
+if node['vim']['use_custom_settings']
   include_recipe 'vim::settings'
 end
 

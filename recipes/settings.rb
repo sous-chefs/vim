@@ -21,11 +21,11 @@
 
 include_recipe 'git'
 
-home_dir   = node[:vim][:settings][:home]
-vim_folder = node[:vim][:settings][:dir]
-vim_source = node[:vim][:settings][:source]
-vim_user   = node[:vim][:settings][:user]
-source_ref = node[:vim][:settings][:ref]
+home_dir   = node['vim']['settings']['home']
+vim_folder = node['vim']['settings']['dir']
+vim_source = node['vim']['settings']['source']
+vim_user   = node['vim']['settings']['user']
+source_ref = node['vim']['settings']['ref']
 
 git "#{home_dir}/#{vim_folder}" do
   repository vim_source

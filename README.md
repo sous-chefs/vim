@@ -22,39 +22,39 @@ Attributes
 
 ## Default recipe attributes:
 
-* `node[:vim][:extra_packages]` - An array of extra packages related to vim to install (like plugins). Empty array by default.
+* `node['vim']['extra_packages']` - An array of extra packages related to vim to install (like plugins). Empty array by default.
 
-* `node[:vim][:install_method]` - Sets the install method, choose from the various install recipes. This attribute is set to 'package' by default.
+* `node['vim']['install_method']` - Sets the install method, choose from the various install recipes. This attribute is set to 'package' by default.
 
-* `node[:vim][:use_custom_settings]` - If set to `true` will download some vim settings. This attribute is set to false by default.
+* `node['vim']['use_custom_settings']` - If set to `true` will download some vim settings. This attribute is set to false by default.
 
 
 ## Compile recipe attributes:
 
-* `node[:vim][:compile][:source_path]` - The path were the vim source files will be stored (`/usr/local/src` by default).
-* `node[:vim][:compile][:source_url]` -  The url for the vim mercurial repository (this should not change any time soon).
-* `node[:vim][:compile][:dependencies]` - These are the non rhl specific devel dependencies for compiling vim.
-* `node[:vim][:compile][:centos_dependencies]` - These are the rhl and centos specific depencies needed for compiling vim. 
-* `node[:vim][:compile][:prefix]` - This is the path the vim bin will be placed, it's `/usr/local` 
-* `node[:vim][:compile][:configuration]` - If you prefer to compile vim differently than the default you can override this configuration.
+* `node['vim']['compile']['source_path']` - The path were the vim source files will be stored (`/usr/local/src` by default).
+* `node['vim']['compile']['source_url']` -  The url for the vim mercurial repository (this should not change any time soon).
+* `node['vim']['compile']['dependencies']` - These are the non rhl specific devel dependencies for compiling vim.
+* `node['vim']['compile']['centos_dependencies']` - These are the rhl and centos specific depencies needed for compiling vim. 
+* `node['vim']['compile']['prefix']` - This is the path the vim bin will be placed, it's `/usr/local` 
+* `node['vim']['compile']['configuration']` - If you prefer to compile vim differently than the default you can override this configuration.
 
 
 ## Settings attributes:
 
-* `node[:vim][:settings][:source]` - This is the url for the .vim source.
-* `node[:vim][:settings][:ref]` - This is just a ref in case master is not an option.
-* `node[:vim][:settings][:dir]` - This is the name of the dir for .vim (in windows it needs to be called vimfiles).
-* `node[:vim][:settings][:user]` - This is the name of user that we will add this .vim to (it is set to the vagrant user by default).
-* `node[:vim][:settings][:home]` - This is the path to the home directory of a user.
+* `node['vim']['settings']['source']` - This is the url for the .vim source.
+* `node['vim']['settings']['ref']` - This is just a ref in case master is not an option.
+* `node['vim']['settings']['dir']` - This is the name of the dir for .vim (in windows it needs to be called vimfiles).
+* `node['vim']['settings']['user']` - This is the name of user that we will add this .vim to (it is set to the vagrant user by default).
+* `node['vim']['settings']['home']` - This is the path to the home directory of a user.
 
 Usage
 =====
 
 Put `recipe[vim]` in a run list, or `include_recipe 'vim'` to ensure that vim is installed on your systems.
 
-If you would like to install additional vim plugin packages, include their package names in the `node[:vim][:extra_packages]` attribute. Verify that your operating sytem has the package available.
+If you would like to install additional vim plugin packages, include their package names in the `node['vim']['extra_packages']` attribute. Verify that your operating sytem has the package available.
 
-If you would rather compile vim from source, as the case may be for centos nodes, then override the `node[:vim][:compile_from_source]` with a value of `true`.
+If you would rather compile vim from source, as the case may be for centos nodes, then override the `node['vim']['compile_from_source']` with a value of `true`.
   
 
   

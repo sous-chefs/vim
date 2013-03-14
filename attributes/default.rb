@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default[:vim][:extra_packages]      = []
-default[:vim][:install_method]      = 'package'
-default[:vim][:use_custom_settings] = false
+default['vim']['extra_packages']      = []
+default['vim']['install_method']      = 'package'
+default['vim']['use_custom_settings'] = false
 

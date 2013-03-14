@@ -30,6 +30,6 @@ vim_base_pkgs.each do |vim_base_pkg|
   package vim_base_pkg
 end
 
-node[:vim][:extra_packages].each do |vimpkg|
+node['vim']['extra_packages'].each do |vimpkg|
   package vimpkg
 end

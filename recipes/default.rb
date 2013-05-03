@@ -33,3 +33,10 @@ end
 node[:vim][:extra_packages].each do |vimpkg|
   package vimpkg
 end
+
+template "/etc/vim/vimrc.local" do
+  source "vimrc.local.erb"
+  owner "root"
+  group "root"
+  mode 00644
+end

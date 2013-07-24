@@ -18,3 +18,4 @@
 #
 
 default[:vim][:extra_packages] = []
+default[:vim][:extra_settings] = []

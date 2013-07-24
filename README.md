@@ -16,6 +16,8 @@ Attributes
 ==========
 
 * `node[:vim][:extra_packages]` - An array of extra packages related to vim to install (like plugins). Empty array by default.
+* `node[:vim][:extra_settings]` - An array of vim settings to add to /etc/vim/vimrc.local, one per line.  Empty array by default.
+                                  Example: `node[:vim][:extra_settings] = [ "syntax on", "set expandtab" ]`
 
 Usage
 =====

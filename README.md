@@ -38,7 +38,7 @@ Put `recipe[vim]` in a run list, or `include_recipe 'vim'` to ensure that vim is
 
 If you would like to install additional vim plugin packages, include their package names in the `node['vim']['extra_packages']` attribute. Verify that your operating sytem has the package available.
 
-If you would rather compile vim from source, as the case may be for centos nodes, then override the `node['vim']['compile_from_source']` with a value of `true`.
+If you would rather compile vim from source, as the case may be for centos nodes, then override the `node['vim']['install_method']` with a value of `'source'`.
   
 
   

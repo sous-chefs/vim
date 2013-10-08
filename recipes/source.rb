@@ -18,13 +18,13 @@
 #
 
 cache_path            = Chef::Config['file_cache_path']
+install_path          = "#{node['vim']['source']['prefix']}/bin/vim"
 source_version        = node['vim']['source']['version']
 source_checksum       = node['vim']['source']['checksum']
-install_path          = "#{node['vim']['source']['prefix']}/bin/vim"
-compile_configuration = node['vim']['source']['configuration']
-dev_dependencies      = node['vim']['source']['dependencies']
+source_configuration  = node['vim']['source']['configuration']
+source_dependencies   = node['vim']['source']['dependencies']
 
-dev_dependencies.each do |dependency|
+source_dependencies.each do |dependency|
   package dependency do
     action :install
   end
@@ -42,7 +42,7 @@ bash "install_vim" do
   code <<-EOH
     mkdir vim-#{source_version}
     tar -jxf vim-#{source_version}.tar.bz2 -C vim-#{source_version} --strip-components 1
-    (cd vim-#{source_version}/ && ./configure #{compile_configuration} && make && make install)
+    (cd vim-#{source_version}/ && ./configure #{source_configuration} && make && make install)
   EOH
   action :nothing
 end

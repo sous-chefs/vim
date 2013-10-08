@@ -40,7 +40,8 @@ bash "install_vim" do
   user "root"
   cwd cache_path
   code <<-EOH
-    tar -jxf vim-#{source_version}.tar.bz2
+    mkdir vim-#{source_version}
+    tar -jxf vim-#{source_version}.tar.bz2 -C vim-#{source_version} --strip-components 1
     (cd vim-#{source_version}/ && ./configure #{compile_configuration} && make && make install)
   EOH
   action :nothing

@@ -12,10 +12,6 @@ Requirements
 * Red Hat/CentOS/Fedora/Scientific
 * ArchLinux
 
-## Dependencies:
-
-* The source recipe uses the mercurial cookbook.
-
 Attributes
 ==========
 
@@ -29,7 +25,8 @@ Attributes
 ## Compile recipe attributes:
 
 * `node['vim']['source']['source_path']` - The path were the vim source files will be stored (`/usr/local/src` by default).
-* `node['vim']['source']['source_url']` -  The url for the vim mercurial repository (this should not change any time soon).
+* `node['vim']['source']['version']` -  The version of vim to compile, 7.4 by default.
+* `node['vim']['source']['checksum']` -  The source file checksum.
 * `node['vim']['source']['dependencies']` - These are the non rhl specific devel dependencies for compiling vim.
 * `node['vim']['source']['centos_dependencies']` - These are the rhl and centos specific depencies needed for compiling vim. 
 * `node['vim']['source']['prefix']` - This is the path the vim bin will be placed, it's `/usr/local` 

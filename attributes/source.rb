@@ -18,7 +18,8 @@
 #
 
 default['vim']['source']['source_path']   = "/usr/local/src"
-default['vim']['source']['source_url']    = 'https://vim.googlecode.com/hg/'
+default['vim']['source']['version']       = '7.4'
+default['vim']['source']['checksum']      = '607e135c559be642f210094ad023dc65'
 default['vim']['source']['prefix']        = "/usr/local"
 default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp --enable-rubyinterp --enable-cscope  --with-features=huge --prefix=#{default['vim']['source']['prefix']}"
 

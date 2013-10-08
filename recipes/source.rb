@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: vim
-# Attributes:: default
+# Attributes:: source
 #
 # Copyright 2010, Opscode, Inc.
 #
@@ -16,13 +16,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe 'mercurial'
 
 source_path           = node['vim']['source']['source_path']
-source_url            = node['vim']['source']['source_url']
+source_version        = node['vim']['source']['version']
+source_checksum       = node['vim']['source']['checksum']
 install_path          = "#{node['vim']['source']['prefix']}/bin/vim"
 compile_configuration = node['vim']['source']['configuration']
 dev_dependencies      = node['vim']['source']['dependencies']
+cache_path            = Chef::Config['file_cache_path']
 
 dev_dependencies.each do |dependency|
   package dependency do
@@ -30,20 +31,18 @@ dev_dependencies.each do |dependency|
   end
 end
 
-mercurial "#{source_path}/vim" do
-  repository source_url
-  mode '0755'
-  owner 'root'
-  reference "tip"
-  action :clone
+remote_file "#{cache_path}/vim-#{source_version}.tar.bz2" do
+  source "ftp://ftp.vim.org/vim-#{source_version}.tar.bz2"
+  checksum source_checksum
+  notifies :run, "bash[install_vim]", :immediately
 end
 
-bash "build-and-install-vim" do
-  cwd source_path
-  code <<-EOF
-    (cd vim && ./configure #{compile_configuration})
-    (cd vim && make && make install)
-  EOF
-  not_if { ::File.exists?(install_path) }
+bash "install_vim" do
+  user "root"
+  cwd cache_path
+  code <<-EOH
+    tar -jxf vim-#{source_version}.tar.bz2
+    (cd vim-#{source_version}/ && ./configure #{compile_configuration} && make && make install)
+  EOH
+  action :nothing
 end
-

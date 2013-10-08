@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: vim
-# Attributes:: source
+# Recipe:: source
 #
 # Copyright 2010, Opscode, Inc.
 #

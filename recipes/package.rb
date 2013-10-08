@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: vim
-# Recipe:: default
+# Recipe:: package
 #
 # Copyright 2010, Opscode, Inc.
 #

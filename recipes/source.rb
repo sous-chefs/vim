@@ -31,7 +31,7 @@ dev_dependencies.each do |dependency|
 end
 
 remote_file "#{cache_path}/vim-#{source_version}.tar.bz2" do
-  source "ftp://ftp.vim.org/vim-#{source_version}.tar.bz2"
+  source "http://ftp.vim.org/pub/vim/unix/vim-#{source_version}.tar.bz2"
   checksum source_checksum
   notifies :run, "bash[install_vim]", :immediately
 end

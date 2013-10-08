@@ -17,7 +17,6 @@
 # limitations under the License.
 #
 
-default['vim']['source']['source_path']   = "/usr/local/src"
 default['vim']['source']['version']       = '7.4'
 default['vim']['source']['checksum']      = '607e135c559be642f210094ad023dc65'
 default['vim']['source']['prefix']        = "/usr/local"

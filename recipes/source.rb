@@ -17,13 +17,12 @@
 # limitations under the License.
 #
 
-source_path           = node['vim']['source']['source_path']
+cache_path            = Chef::Config['file_cache_path']
 source_version        = node['vim']['source']['version']
 source_checksum       = node['vim']['source']['checksum']
 install_path          = "#{node['vim']['source']['prefix']}/bin/vim"
 compile_configuration = node['vim']['source']['configuration']
 dev_dependencies      = node['vim']['source']['dependencies']
-cache_path            = Chef::Config['file_cache_path']
 
 dev_dependencies.each do |dependency|
   package dependency do

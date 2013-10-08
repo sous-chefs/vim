@@ -27,7 +27,7 @@ Attributes
 * `node['vim']['source']['version']` -  The version of vim to compile, 7.4 by default.
 * `node['vim']['source']['checksum']` -  The source file checksum.
 * `node['vim']['source']['dependencies']` - These are the non rhl specific devel dependencies for compiling vim.
-* `node['vim']['source']['centos_dependencies']` - These are the rhl and centos specific depencies needed for compiling vim. 
+* `node['vim']['source']['centos_dependencies']` - These are the rhl and centos specific dependencies needed for compiling vim. 
 * `node['vim']['source']['prefix']` - This is the path the vim bin will be placed, it's `/usr/local` 
 * `node['vim']['source']['configuration']` - If you prefer to compile vim differently than the default you can override this configuration.
 

@@ -2,7 +2,7 @@
 # Cookbook Name:: vim
 # Recipe:: source
 #
-# Copyright 2010, Opscode, Inc.
+# Copyright 2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,13 +18,9 @@
 #
 
 cache_path            = Chef::Config['file_cache_path']
-install_path          = "#{node['vim']['source']['prefix']}/bin/vim"
 source_version        = node['vim']['source']['version']
-source_checksum       = node['vim']['source']['checksum']
-source_configuration  = node['vim']['source']['configuration']
-source_dependencies   = node['vim']['source']['dependencies']
 
-source_dependencies.each do |dependency|
+node['vim']['source']['dependencies'].each do |dependency|
   package dependency do
     action :install
   end
@@ -32,17 +28,16 @@ end
 
 remote_file "#{cache_path}/vim-#{source_version}.tar.bz2" do
   source "http://ftp.vim.org/pub/vim/unix/vim-#{source_version}.tar.bz2"
-  checksum source_checksum
+  checksum node['vim']['source']['checksum']
   notifies :run, "bash[install_vim]", :immediately
 end
 
 bash "install_vim" do
-  user "root"
   cwd cache_path
   code <<-EOH
     mkdir vim-#{source_version}
     tar -jxf vim-#{source_version}.tar.bz2 -C vim-#{source_version} --strip-components 1
-    (cd vim-#{source_version}/ && ./configure #{source_configuration} && make && make install)
+    (cd vim-#{source_version}/ && ./configure #{node['vim']['source']['configuration']} && make && make install)
   EOH
   action :nothing
 end

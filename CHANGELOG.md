@@ -1,3 +1,7 @@
-## v1.0.2:
+vim Cookbook CHANGELOG
+======================
+This file is used to list changes made in each version of the vim cookbook.
 
-* Fixes COOK-598 (RHEL platforms support).
+v0.0.0
+------
+Text goes here

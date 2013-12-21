@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: vim
-# Recipe:: default
+# Recipe:: package
 #
-# Copyright 2010, Opscode, Inc.
+# Copyright 2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,14 +16,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# There is no vim package on RHEL/CentOS derivatives
+# * vim-minimal gives you /bin/vi
+# * vim-enhanced gives you /usr/bin/vim
+#
+vim_base_pkgs = value_for_platform_family(
+  ["ubuntu", "debian", "arch"] => { "default" => ["vim"] },
+  ["redhat", "centos", "fedora", "scientific"] => { "default" => ["vim-minimal","vim-enhanced"] },
+  "default" => ["vim"]
+)
 
-begin
-  include_recipe "vim::#{node['vim']['install_method']}"
-rescue Chef::Exceptions::RecipeNotFound
-  Chef::Log.warn "A build-essential recipe does not exist for the platform_family: #{node['platform_family']}"
+vim_base_pkgs.each do |vim_base_pkg|
+  package vim_base_pkg
 end
 
-if node['vim']['use_custom_settings']
-  include_recipe 'vim::settings'
+node['vim']['extra_packages'].each do |vimpkg|
+  package vimpkg
 end
-

@@ -21,8 +21,8 @@
 # * vim-enhanced gives you /usr/bin/vim
 #
 vim_base_pkgs = value_for_platform_family(
-  ["ubuntu", "debian", "arch"] => { "default" => ["vim"] },
-  ["redhat", "centos", "fedora", "scientific"] => { "default" => ["vim-minimal","vim-enhanced"] },
+  ["ubuntu", "debian", "arch"] => ["vim"],
+  ["redhat", "centos", "fedora", "scientific"] => ["vim-minimal","vim-enhanced"],
   "default" => ["vim"]
 )
 

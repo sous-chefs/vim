@@ -1,29 +1,22 @@
 require 'spec_helper'
 
 describe 'vim::default' do
-  PACKAGE_CHECKS = {
-    'ubuntu' => {
-      '12.04' => ['vim']
-    },
-    'debian' => {
-      '7.0' => ['vim'],
-      '7.1' => ['vim']
-    },
-    'redhat' => {
-      '6.3' => ['vim-minimal', 'vim-enhanced']
-    }
-  }
+  it 'should default to install_method = "package"' do
+    runner = ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04')
+    runner.converge(described_recipe)
+    expect(runner.node['vim']['install_method']).to eq('package')
+  end
 
-  PACKAGE_CHECKS.each do |platform, versions|
-    versions.each do |version, packages|
-      packages.each do |package_name|
-        it "should install #{package_name} on #{platform} #{version}" do
-          runner = ChefSpec::Runner.new(platform: platform, version: version) do |node|
-            node.set['vim']['install_method'] = 'package'
-          end.converge(described_recipe)
-          expect(runner).to install_package(package_name)
-        end
-      end
-    end
+  it 'should include the vim::package recipe when install_method = "package"' do
+    runner = ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04')
+    runner.converge(described_recipe)
+    expect(runner).to include_recipe('vim::package')   
+  end
+
+  it 'should include the vim::source recipe when install_method = "source"' do
+    runner = ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04') do |node|
+      node.set['vim']['install_method'] = 'source'
+    end.converge(described_recipe)
+    expect(runner).to include_recipe('vim::source')   
   end
 end

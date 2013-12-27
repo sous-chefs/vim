@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'vim::default' do
-  PACKAGE_CHECKS = {
+  package_checks = {
     'ubuntu' => {
       '12.04' => ['vim']
     },
@@ -14,7 +14,7 @@ describe 'vim::default' do
     }
   }
 
-  PACKAGE_CHECKS.each do |platform, versions|
+  package_checks.each do |platform, versions|
     versions.each do |version, packages|
       packages.each do |package_name|
         it "should install #{package_name} on #{platform} #{version}" do

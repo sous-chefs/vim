@@ -22,8 +22,3 @@ begin
 rescue Chef::Exceptions::RecipeNotFound
   Chef::Log.warn "A build-essential recipe does not exist for the platform_family: #{node['platform_family']}"
 end
-
-if node['vim']['use_custom_settings']
-  include_recipe 'vim::settings'
-end
-

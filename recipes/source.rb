@@ -20,6 +20,12 @@
 cache_path            = Chef::Config['file_cache_path']
 source_version        = node['vim']['source']['version']
 
+if platform_family? "rhel"
+  node.default['vim']['source']['dependencies']  = %w{ python-devel ncurses ncurses-devel ruby ruby-devel perl-devel ctags gcc make }
+else
+  node.default['vim']['source']['dependencies']  = %w{ python-dev libncurses5-dev ruby ruby-dev libperl-dev ctags gcc make }
+end
+
 node['vim']['source']['dependencies'].each do |dependency|
   package dependency do
     action :install

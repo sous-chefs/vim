@@ -24,6 +24,7 @@ if platform_family? "rhel"
   node.default['vim']['source']['dependencies']  = %w{ python-devel ncurses ncurses-devel ruby ruby-devel perl-devel ctags gcc make }
 else
   node.default['vim']['source']['dependencies']  = %w{ python-dev libncurses5-dev ruby ruby-dev libperl-dev exuberant-ctags gcc make }
+  include_recipe "apt::default" # run apt-get update before installing packages
 end
 
 node['vim']['source']['dependencies'].each do |dependency|

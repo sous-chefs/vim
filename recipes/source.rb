@@ -20,6 +20,13 @@
 cache_path            = Chef::Config['file_cache_path']
 source_version        = node['vim']['source']['version']
 
+if platform_family? "rhel"
+  node.default['vim']['source']['dependencies']  = %w{ python-devel ncurses ncurses-devel ruby ruby-devel perl-devel ctags gcc make }
+else
+  node.default['vim']['source']['dependencies']  = %w{ python-dev libncurses5-dev ruby ruby-dev libperl-dev exuberant-ctags gcc make }
+  include_recipe "apt::default" # run apt-get update before installing packages
+end
+
 node['vim']['source']['dependencies'].each do |dependency|
   package dependency do
     action :install
@@ -29,6 +36,7 @@ end
 remote_file "#{cache_path}/vim-#{source_version}.tar.bz2" do
   source "http://ftp.vim.org/pub/vim/unix/vim-#{source_version}.tar.bz2"
   checksum node['vim']['source']['checksum']
+  action :create_if_missing
   notifies :run, "bash[install_vim]", :immediately
 end
 

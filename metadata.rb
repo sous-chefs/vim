@@ -10,5 +10,5 @@ version '1.1.4'
   supports os
 end
 
-source_url 'https://github.com/opscode-cookbooks/vim' if respond_to?(:source_url)
-issues_url 'https://github.com/opscode-cookbooks/vim/issues' if respond_to?(:source_url)
+source_url 'https://github.com/chef-cookbooks/vim' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-cookbooks/vim/issues' if respond_to?(:source_url)

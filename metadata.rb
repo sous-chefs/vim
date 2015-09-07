@@ -11,4 +11,4 @@ version '1.1.4'
 end
 
 source_url 'https://github.com/chef-cookbooks/vim' if respond_to?(:source_url)
-issues_url 'https://github.com/chef-cookbooks/vim/issues' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-cookbooks/vim/issues' if respond_to?(:issues_url)

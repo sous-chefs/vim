@@ -1,7 +1,7 @@
 vim Cookbook
 ============
 
-[![Build Status](https://travis-ci.org/opscode-cookbooks/vim.svg?branch=master)](https://travis-ci.org/opscode-cookbooks/vim)
+[![Build Status](https://travis-ci.org/chef-cookbooks/vim.svg?branch=master)](https://travis-ci.org/chef-cookbooks/vim)
 [![Cookbook Version](https://img.shields.io/cookbook/v/vim.svg)](https://supermarket.chef.io/cookbooks/vim)
 
 Installs or compiles/installs vim.

@@ -29,10 +29,10 @@ end
 remote_file "#{cache_path}/vim-#{source_version}.tar.bz2" do
   source "http://ftp.vim.org/pub/vim/unix/vim-#{source_version}.tar.bz2"
   checksum node['vim']['source']['checksum']
-  notifies :run, "bash[install_vim]", :immediately
+  notifies :run, 'bash[install_vim]', :immediately
 end
 
-bash "install_vim" do
+bash 'install_vim' do
   cwd cache_path
   code <<-EOH
     mkdir vim-#{source_version}

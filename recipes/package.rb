@@ -20,9 +20,9 @@
 # * vim-minimal gives you /bin/vi
 # * vim-enhanced gives you /usr/bin/vim
 #
-vim_base_pkgs = value_for_platform(
-  %w(ubuntu debian arch) => { 'default' => ['vim'] },
-  %w(redhat centos fedora scientific) => { 'default' => ['vim-minimal', 'vim-enhanced'] },
+vim_base_pkgs = value_for_platform_family(
+  %w(debian arch) => ['vim'],
+  %w(rhel fedora) => ['vim-minimal', 'vim-enhanced'],
   'default' => ['vim']
 )
 

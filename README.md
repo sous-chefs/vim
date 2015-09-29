@@ -9,11 +9,17 @@ Installs or compiles/installs vim.
 Requirements
 ============
 
-## Platforms:
+#### Platforms
 
 * Ubuntu/Debian
 * RHEL/CentOS/Scientific/Amazon/Oracle
-* ArchLinux
+
+#### Chef
+- Chef 11+
+
+#### Cookbooks
+- none
+
 
 Attributes
 ==========
@@ -48,11 +54,11 @@ If you would rather compile vim from source, as the case may be for centos nodes
 License and Author
 ==================
 
-- Author:: Joshua Timberman (<joshua@chef.io>)
+**Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
 
-```text
-Copyright:: 2010-2015, Chef Software, Inc
+**Copyright:** 2008-2015, Chef Software, Inc.
 
+```
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at

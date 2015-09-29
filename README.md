@@ -7,8 +7,7 @@ vim Cookbook
 Installs or compiles/installs vim.
 
 Requirements
-============
-
+------------
 #### Platforms
 
 * Ubuntu/Debian
@@ -22,8 +21,7 @@ Requirements
 
 
 Attributes
-==========
-
+----------
 ## Default recipe attributes:
 
 * `node['vim']['extra_packages']` - An array of extra packages related to vim to install (like plugins). Empty array by default.
@@ -41,8 +39,7 @@ Attributes
 * `node['vim']['source']['configuration']` - If you prefer to compile vim differently than the default you can override this configuration.
 
 Usage
-=====
-
+-----
 Put `recipe[vim]` in a run list, or `include_recipe 'vim'` to ensure that vim is installed on your systems.
 
 If you would like to install additional vim plugin packages, include their package names in the `node['vim']['extra_packages']` attribute. Verify that your operating sytem has the package available.
@@ -51,8 +48,8 @@ If you would rather compile vim from source, as the case may be for centos nodes
   
 
   
-License and Author
-==================
+License & Authors
+-----------------
 
 **Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
 

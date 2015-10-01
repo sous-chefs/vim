@@ -29,7 +29,6 @@ end
 remote_file "#{cache_path}/vim-#{source_version}.tar.bz2" do
   source "http://ftp.vim.org/pub/vim/unix/vim-#{source_version}.tar.bz2"
   checksum node['vim']['source']['checksum']
-  notifies :run, 'bash[install_vim]', :immediately
 end
 
 bash 'install_vim' do
@@ -39,5 +38,5 @@ bash 'install_vim' do
     tar -jxf vim-#{source_version}.tar.bz2 -C vim-#{source_version} --strip-components 1
     (cd vim-#{source_version}/ && make clean && ./configure #{node['vim']['source']['configuration']} && make && make install)
   EOH
-  action :nothing
+  creates "#{node['vim']['source']['prefix']}/bin/vim"
 end

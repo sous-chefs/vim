@@ -20,11 +20,7 @@
 cache_path = Chef::Config['file_cache_path']
 source_version = node['vim']['source']['version']
 
-node['vim']['source']['dependencies'].each do |dependency|
-  package dependency do
-    action :install
-  end
-end
+package node['vim']['source']['dependencies']
 
 # vim looks for xsubpp in wrong location RHEL 7+ and Fedora
 if platform?('fedora') || (platform_family?('rhel') && node['platform_version'].to_i >= 7)

@@ -25,5 +25,15 @@ default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp -
 if platform_family? 'rhel', 'fedora'
   default['vim']['source']['dependencies']  = %w(python-devel ncurses-devel ruby-devel perl-devel perl-ExtUtils-Embed perl-ExtUtils-ParseXS perl-ExtUtils-XSpp perl-ExtUtils-CBuilder ctags gcc make)
 else
-  default['vim']['source']['dependencies']  = %w(python-dev python3-dev libncurses5-dev ruby-dev libperl-dev exuberant-ctags lua5.1 gcc make)
+  default['vim']['source']['dependencies']  = %w( exuberant-ctags
+                                                  gcc
+                                                  libncurses5-dev
+                                                  libperl-dev
+                                                  lua5.1
+                                                  make
+                                                  python3-dev
+                                                  python-dev
+                                                  ruby-dev
+                                                  tcl-dev
+                                              )
 end

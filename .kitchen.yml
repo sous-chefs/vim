@@ -18,7 +18,12 @@ platforms:
     run_list: apt::default
 
 suites:
-  - name: default
+  - name: package
+    run_list:
+      - recipe[vim::default]
+  - name: source
     run_list:
       - recipe[vim::default]
     attributes:
+      vim:
+        install_method: source

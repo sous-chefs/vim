@@ -20,5 +20,5 @@
 begin
   include_recipe "vim::#{node['vim']['install_method']}"
 rescue Chef::Exceptions::RecipeNotFound
-  Chef::Log.warn "A build-essential recipe does not exist for the platform_family: #{node['platform_family']}"
+  Chef::Log.warn "A vim recipe does not exist for the install method specified: #{node['vim']['install_method']}"
 end

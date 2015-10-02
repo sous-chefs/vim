@@ -8,9 +8,6 @@ describe 'vim::default' do
     'debian' => {
       '7.0' => ['vim'],
       '7.1' => ['vim']
-    },
-    'redhat' => {
-      '6.3' => ['vim-minimal', 'vim-enhanced']
     }
   }
 

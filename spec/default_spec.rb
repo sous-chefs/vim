@@ -6,7 +6,6 @@ describe 'vim::default' do
                              version: '12.04',
                              file_cache_path: '/var/chef/cache') do |node|
       node.set['vim']['source']['version'] = 'foo_version_1'
-      node.set['vim']['source']['dependencies'] = %w(libncurses5-dev ruby ruby-dev libperl-dev ctags gcc make)
     end.converge(described_recipe)
   end
 

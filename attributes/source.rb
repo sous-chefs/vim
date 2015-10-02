@@ -20,7 +20,7 @@
 default['vim']['source']['version']       = '7.4'
 default['vim']['source']['checksum']      = 'd0f5a6d2c439f02d97fa21bd9121f4c5abb1f6cd8b5a79d3ca82867495734ade'
 default['vim']['source']['prefix']        = '/usr/local'
-default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp --enable-python3interp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope  --with-features=huge --prefix=#{default['vim']['source']['prefix']}"
+default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope  --with-features=huge --prefix=#{default['vim']['source']['prefix']}"
 
 if platform_family? 'rhel', 'fedora'
   default['vim']['source']['dependencies']  = %w( ctags
@@ -33,8 +33,6 @@ if platform_family? 'rhel', 'fedora'
                                                   perl-ExtUtils-CBuilder
                                                   perl-ExtUtils-Embed
                                                   perl-ExtUtils-ParseXS
-                                                  perl-ExtUtils-XSpp
-                                                  python3-devel
                                                   python-devel
                                                   ruby-devel
                                                   tcl-devel
@@ -46,7 +44,6 @@ else
                                                   libperl-dev
                                                   lua5.1
                                                   make
-                                                  python3-dev
                                                   python-dev
                                                   ruby-dev
                                                   tcl-dev

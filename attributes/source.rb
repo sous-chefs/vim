@@ -27,7 +27,6 @@ if platform_family? 'rhel', 'fedora'
     default['vim']['source']['dependencies'] = %w( ctags
                                                    gcc
                                                    lua-devel
-                                                   luajit-devel
                                                    make
                                                    ncurses-devel
                                                    perl-devel

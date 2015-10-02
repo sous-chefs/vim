@@ -23,7 +23,22 @@ default['vim']['source']['prefix']        = '/usr/local'
 default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp --enable-python3interp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope  --with-features=huge --prefix=#{default['vim']['source']['prefix']}"
 
 if platform_family? 'rhel', 'fedora'
-  default['vim']['source']['dependencies']  = %w(python-devel ncurses-devel ruby-devel perl-devel perl-ExtUtils-Embed perl-ExtUtils-ParseXS perl-ExtUtils-XSpp perl-ExtUtils-CBuilder ctags gcc make)
+  default['vim']['source']['dependencies']  = %w( ctags
+                                                  gcc
+                                                  lua-devel
+                                                  luajit-devel
+                                                  make
+                                                  ncurses-devel
+                                                  perl-devel
+                                                  perl-ExtUtils-CBuilder
+                                                  perl-ExtUtils-Embed
+                                                  perl-ExtUtils-ParseXS
+                                                  perl-ExtUtils-XSpp
+                                                  python3-devel
+                                                  python-devel
+                                                  ruby-devel
+                                                  tcl-devel
+                                              )
 else
   default['vim']['source']['dependencies']  = %w( exuberant-ctags
                                                   gcc

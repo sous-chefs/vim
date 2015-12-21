@@ -26,6 +26,12 @@ vim_base_pkgs = value_for_platform_family(
   'default' => ['vim']
 )
 
-package vim_base_pkgs
+vim_base_pkgs.each do |pkg|
+  package pkg do
+    action :install
+  end
+end
 
-package node['vim']['extra_packages']
+unless node['vim']['extra_packages'].empty?
+  package node['vim']['extra_packages']
+end

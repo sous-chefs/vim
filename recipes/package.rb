@@ -32,6 +32,6 @@ vim_base_pkgs.each do |pkg|
   end
 end
 
-if not node['vim']['extra_packages'].empty?
+unless node['vim']['extra_packages'].empty?
   package node['vim']['extra_packages']
 end

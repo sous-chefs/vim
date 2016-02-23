@@ -6,31 +6,29 @@ vim Cookbook
 
 Installs or compiles/installs vim.
 
-Requirements
-------------
-#### Platforms
+## Requirements
+### Platforms
 
 * Ubuntu/Debian
 * RHEL/CentOS/Scientific/Amazon/Oracle
 * Fedora
 
-#### Chef
+### Chef
 - Chef 12.1+
 
-#### Cookbooks
+### Cookbooks
 - none
 
+## Attributes
 
-Attributes
-----------
-#### Default recipe attributes:
+### Default recipe attributes:
 
 * `node['vim']['extra_packages']` - An array of extra packages related to vim to install (like plugins). Empty array by default.
 
 * `node['vim']['install_method']` - Sets the install method, choose from the various install recipes. This attribute is set to 'package' by default.
 
 
-#### Source recipe attributes:
+### Source recipe attributes:
 
 * `node['vim']['source']['version']` -  The version of vim to compile, 7.4 by default.
 * `node['vim']['source']['checksum']` -  The source file checksum.
@@ -39,9 +37,11 @@ Attributes
 * `node['vim']['source']['prefix']` - This is the path the vim bin will be placed, it's `/usr/local`
 * `node['vim']['source']['configuration']` - If you prefer to compile vim differently than the default you can override this configuration.
 
-Usage
------
-Put `recipe[vim]` in a run list, or `include_recipe 'vim'` to ensure that vim is installed on your systems.
+## Usage
+
+Add `recipe[vim]` to your run list or include the default recipe with `include_recipe 'vim'` in a recipe that is in your run list.
+
+This uses the value of the attribute `node['vim']['install_method']` which by default is _package_. 
 
 If you would like to install additional vim plugin packages, include their package names in the `node['vim']['extra_packages']` attribute. Verify that your operating sytem has the package available.
 
@@ -54,7 +54,7 @@ License & Authors
 
 **Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
 
-**Copyright:** 2008-2015, Chef Software, Inc.
+**Copyright:** 2008-2016, Chef Software, Inc.
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");

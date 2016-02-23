@@ -13,7 +13,11 @@ describe 'vim::source' do
   it 'uses remote_file resource to download vim tar file' do
     expect(chef_run).to create_remote_file('/var/chef/cache/vim-foo_version_1.tar.bz2')
   end
-
+  
+  it 'uses package resource to install bzip2' do
+    expect(chef_run).to install_package('bzip2')
+  end
+  
   it 'uses bash resource to install vim' do
     expect(chef_run).to run_bash('install_vim')
   end

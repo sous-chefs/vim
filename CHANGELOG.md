@@ -2,6 +2,10 @@ vim Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the vim cookbook.
 
+v2.0.1 (2016-02-22)
+-------------------
+- add missing bzip2 package to fix source recipe.
+
 v2.0.0 (2015-10-01)
 -------------------
 - Use multi-package installs introduced in Chef 12.1 to simplify code and speed up installs

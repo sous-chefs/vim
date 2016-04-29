@@ -5,17 +5,31 @@ provisioner:
   name: chef_zero
 
 platforms:
+  - name: centos-5.11
   - name: centos-6.7
-  - name: centos-7.1
-  - name: debian-7.8
+  - name: centos-7.2
+  - name: debian-7.10
     run_list: apt::default
-  - name: debian-8.1
+  - name: debian-8.4
     run_list: apt::default
-  - name: fedora-21
+  - name: fedora-22
+    run_list: yum::dnf_yum_compat
+  - name: fedora-23
+    run_list: yum::dnf_yum_compat
   - name: ubuntu-12.04
     run_list: apt::default
   - name: ubuntu-14.04
     run_list: apt::default
+  - name: ubuntu-16.04
+    run_list: apt::default
+  - name: macosx-10.10
+    driver:
+      box: chef/macosx-10.10 # private box in Chef's Atlas account
+      provider: vmware_fusion
+  - name: macosx-10.11
+    driver:
+      box: chef/macosx-10.11 # private box in Chef's Atlas account
+      provider: vmware_fusion
 
 suites:
   - name: package

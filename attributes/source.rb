@@ -22,9 +22,9 @@ default['vim']['source']['checksum']      = 'd0f5a6d2c439f02d97fa21bd9121f4c5abb
 default['vim']['source']['prefix']        = '/usr/local'
 default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope  --with-features=huge --prefix=#{default['vim']['source']['prefix']}"
 
-if platform_family? 'rhel', 'fedora'
-  if node['platform_version'].to_i >= 6
-    default['vim']['source']['dependencies'] = %w( ctags
+default['vim']['source']['dependencies'] = if platform_family? 'rhel', 'fedora'
+                                             if node['platform_version'].to_i >= 6
+                                               %w( ctags
                                                    gcc
                                                    lua-devel
                                                    make
@@ -36,9 +36,9 @@ if platform_family? 'rhel', 'fedora'
                                                    python-devel
                                                    ruby-devel
                                                    tcl-devel
-                                               )
-  else # centos 5 and earlier lack lua, luajit, and many of the perl packages found in later releases.  Also installs fail without libselinux-devel
-    default['vim']['source']['dependencies'] = %w( ctags
+                                                                                          )
+                                             else # centos 5 and earlier lack lua, luajit, and many of the perl packages found in later releases.  Also installs fail without libselinux-devel
+                                               %w( ctags
                                                    gcc
                                                    make
                                                    ncurses-devel
@@ -47,10 +47,10 @@ if platform_family? 'rhel', 'fedora'
                                                    ruby-devel
                                                    tcl-devel
                                                    libselinux-devel
-                                               )
-  end
-else
-  default['vim']['source']['dependencies'] = %w( exuberant-ctags
+                                                                                          )
+                                             end
+                                           else
+                                             %w( exuberant-ctags
                                                  gcc
                                                  libncurses5-dev
                                                  libperl-dev
@@ -59,5 +59,5 @@ else
                                                  python-dev
                                                  ruby-dev
                                                  tcl-dev
-                                             )
-end
+                                                                                        )
+                                           end

@@ -16,7 +16,7 @@ describe 'vim::default' do
       packages.each do |package_name|
         it "should install #{package_name} on #{platform} #{version}" do
           chef_run = ChefSpec::SoloRunner.new(platform: platform, version: version, file_cache_path: '/var/chef/cache') do |node|
-            node.set['vim']['install_method'] = 'package'
+            node.normal['vim']['install_method'] = 'package'
           end.converge(described_recipe)
           expect(chef_run).to install_package(package_name)
         end

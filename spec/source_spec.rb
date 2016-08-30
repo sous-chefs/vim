@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'vim::source' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'ubuntu',
-                             version: '12.04',
+                             version: '16.04',
                              file_cache_path: '/var/chef/cache') do |node|
       node.normal['vim']['source']['version'] = 'foo_version_1'
       # node.normal['vim']['source']['dependencies'] = %w(libncurses5-dev ruby ruby-dev libperl-dev exuberant-ctags liblua5.2-dev gcc make)

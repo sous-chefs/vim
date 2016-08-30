@@ -3,11 +3,13 @@ require 'spec_helper'
 describe 'vim::default' do
   package_checks = {
     'ubuntu' => {
-      '12.04' => ['vim']
+      '12.04' => ['vim'],
+      '14.04' => ['vim'],
+      '16.04' => ['vim']
     },
     'debian' => {
-      '7.0' => ['vim'],
-      '7.1' => ['vim']
+      '7.11' => ['vim'],
+      '8.5' => ['vim']
     }
   }
 

@@ -1,13 +1,21 @@
-vim Cookbook CHANGELOG
-======================
+# vim Cookbook CHANGELOG
+
 This file is used to list changes made in each version of the vim cookbook.
 
-v2.0.1 (2016-02-22)
--------------------
+## 2.0.2 (2016-08-30)
+
+- Add IBM zLinux to metadata
+- Use kitchen-dokken in Travis CI and test on more Platforms
+- Update specs with new platforms
+- Remove Chef 11 compatibility
+- Add chef_version to metadata
+
+## v2.0.1 (2016-02-22)
+
 - add missing bzip2 package to fix source recipe.
 
-v2.0.0 (2015-10-01)
--------------------
+## v2.0.0 (2015-10-01)
+
 - Use multi-package installs introduced in Chef 12.1 to simplify code and speed up installs
 - Add Fedora source install support
 - Fix CentOS source install support and ensure vim compiles correctly on CentOS 5/6/7
@@ -18,8 +26,8 @@ v2.0.0 (2015-10-01)
 - Add basic Serverspec test for source installs to ensure that vim runs
 - Fixed the error message is a bad install_method attribute is given to describe the actual problema and vim cookbook
 
-v1.1.4 (2015-09-21)
--------------------
+## v1.1.4 (2015-09-21)
+
 - Converted value_for_platform to value_for_platform_family in order to support all RHEL and Debian derivitives
 - Added a Kitchen CI config for integration testing
 - Updated Travis to test on the latest ruby versions and to perform Chefspec tests
@@ -33,11 +41,12 @@ v1.1.4 (2015-09-21)
 - Updated development dependencies
 - Updated Kitchen config to work with the latest in Chef DK
 
-v1.1.2 (2013-12-30)
--------------------
-* Fixed Ubuntu package installer bug. Adding specs.
+## v1.1.2 (2013-12-30)
 
-v1.1.0
-------
+- Fixed Ubuntu package installer bug. Adding specs.
+
+## v1.1.0
+
 ### Improvement
+
 - **[COOK-2465](https://tickets.opscode.com/browse/COOK-2465)** - Add a compile and settings optional recipe.

@@ -1,58 +1,55 @@
-vim Cookbook
-============
+# vim Cookbook
 
-[![Build Status](https://travis-ci.org/chef-cookbooks/vim.svg?branch=master)](https://travis-ci.org/chef-cookbooks/vim)
-[![Cookbook Version](https://img.shields.io/cookbook/v/vim.svg)](https://supermarket.chef.io/cookbooks/vim)
+[![Build Status](https://travis-ci.org/chef-cookbooks/vim.svg?branch=master)](https://travis-ci.org/chef-cookbooks/vim) [![Cookbook Version](https://img.shields.io/cookbook/v/vim.svg)](https://supermarket.chef.io/cookbooks/vim)
 
 Installs or compiles/installs vim.
 
 ## Requirements
+
 ### Platforms
 
-* Ubuntu/Debian
-* RHEL/CentOS/Scientific/Amazon/Oracle
-* Fedora
+- Ubuntu/Debian
+- RHEL/CentOS/Scientific/Amazon/Oracle
+- Fedora
 
 ### Chef
+
 - Chef 12.1+
 
 ### Cookbooks
+
 - none
 
 ## Attributes
 
 ### Default recipe attributes:
 
-* `node['vim']['extra_packages']` - An array of extra packages related to vim to install (like plugins). Empty array by default.
+- `node['vim']['extra_packages']` - An array of extra packages related to vim to install (like plugins). Empty array by default.
 
-* `node['vim']['install_method']` - Sets the install method, choose from the various install recipes. This attribute is set to 'package' by default.
-
+- `node['vim']['install_method']` - Sets the install method, choose from the various install recipes. This attribute is set to 'package' by default.
 
 ### Source recipe attributes:
 
-* `node['vim']['source']['version']` -  The version of vim to compile, 7.4 by default.
-* `node['vim']['source']['checksum']` -  The source file checksum.
-* `node['vim']['source']['dependencies']` - These are the non rhl specific devel dependencies for compiling vim.
-* `node['vim']['source']['centos_dependencies']` - These are the rhl and centos specific dependencies needed for compiling vim.
-* `node['vim']['source']['prefix']` - This is the path the vim bin will be placed, it's `/usr/local`
-* `node['vim']['source']['configuration']` - If you prefer to compile vim differently than the default you can override this configuration.
+- `node['vim']['source']['version']` - The version of vim to compile, 7.4 by default.
+- `node['vim']['source']['checksum']` - The source file checksum.
+- `node['vim']['source']['dependencies']` - These are the non rhl specific devel dependencies for compiling vim.
+- `node['vim']['source']['centos_dependencies']` - These are the rhl and centos specific dependencies needed for compiling vim.
+- `node['vim']['source']['prefix']` - This is the path the vim bin will be placed, it's `/usr/local`
+- `node['vim']['source']['configuration']` - If you prefer to compile vim differently than the default you can override this configuration.
 
 ## Usage
 
 Add `recipe[vim]` to your run list or include the default recipe with `include_recipe 'vim'` in a recipe that is in your run list.
 
-This uses the value of the attribute `node['vim']['install_method']` which by default is _package_. 
+This uses the value of the attribute `node['vim']['install_method']` which by default is _package_.
 
 If you would like to install additional vim plugin packages, include their package names in the `node['vim']['extra_packages']` attribute. Verify that your operating sytem has the package available.
 
 If you would rather compile vim from source, as the case may be for centos nodes, then override the `node['vim']['install_method']` with a value of `'source'`.
 
+## License & Authors
 
-
-License & Authors
------------------
-
-**Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
+**Author:** Cookbook Engineering Team ([cookbooks@chef.io](mailto:cookbooks@chef.io))
 
 **Copyright:** 2008-2016, Chef Software, Inc.
 

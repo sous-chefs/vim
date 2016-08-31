@@ -8,7 +8,7 @@ Installs or compiles/installs vim.
 
 ### Platforms
 
-- Ubuntu/Debian
+- Ubuntu/Debian (source installs on Ubuntu 16.04 fail due to a vim bug)
 - RHEL/CentOS/Scientific/Amazon/Oracle
 - Fedora
 

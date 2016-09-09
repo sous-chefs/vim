@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'vim::default' do
-  let(:chef_run) do
+  cached(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'ubuntu',
                              version: '16.04',
                              file_cache_path: '/var/chef/cache') do |node|

@@ -5,4 +5,5 @@ metadata
 group :integration do
   cookbook 'yum'
   cookbook 'apt'
+  cookbook 'homebrew'
 end

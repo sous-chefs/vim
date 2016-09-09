@@ -23,7 +23,7 @@ default['vim']['source']['prefix']        = '/usr/local'
 default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope  --with-features=huge --prefix=#{default['vim']['source']['prefix']}"
 
 default['vim']['source']['dependencies'] = if platform_family? 'rhel', 'fedora'
-                                             if node['platform_version'].to_i >= 6
+                                             if node['platform_version'].to_i >= 6 || platform_family?('suse')
                                                %w( ctags
                                                    gcc
                                                    lua-devel
@@ -36,6 +36,7 @@ default['vim']['source']['dependencies'] = if platform_family? 'rhel', 'fedora'
                                                    python-devel
                                                    ruby-devel
                                                    tcl-devel
+                                                   bzip2
                                                                                           )
                                              else # centos 5 and earlier lack lua, luajit, and many of the perl packages found in later releases.  Also installs fail without libselinux-devel
                                                %w( ctags
@@ -47,8 +48,21 @@ default['vim']['source']['dependencies'] = if platform_family? 'rhel', 'fedora'
                                                    ruby-devel
                                                    tcl-devel
                                                    libselinux-devel
+                                                   bzip2
                                                                                           )
                                              end
+                                           elsif platform_family?('suse')
+                                             %w( ctags
+                                                 gcc
+                                                 lua-devel
+                                                 make
+                                                 ncurses-devel
+                                                 perl
+                                                 python-devel
+                                                 ruby-devel
+                                                 tcl-devel
+                                                 tar
+                                                                                        )
                                            else
                                              %w( exuberant-ctags
                                                  gcc
@@ -59,5 +73,6 @@ default['vim']['source']['dependencies'] = if platform_family? 'rhel', 'fedora'
                                                  python-dev
                                                  ruby-dev
                                                  tcl-dev
+                                                 bzip2
                                                                                         )
                                            end

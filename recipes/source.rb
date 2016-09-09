@@ -20,7 +20,6 @@
 cache_path = Chef::Config['file_cache_path']
 source_version = node['vim']['source']['version']
 
-package 'bzip2'
 package node['vim']['source']['dependencies']
 
 include_recipe 'vim::source_rhel' if platform?('fedora') || platform_family?('rhel')

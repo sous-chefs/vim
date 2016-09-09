@@ -11,6 +11,7 @@ Installs or compiles/installs vim.
 - Ubuntu/Debian (source installs on Ubuntu 16.04 fail due to a vim bug)
 - RHEL/CentOS/Scientific/Amazon/Oracle
 - Fedora
+- openSUSE / SUSE Linux Enterprises
 
 ### Chef
 

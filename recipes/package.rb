@@ -28,4 +28,4 @@ vim_base_pkgs = value_for_platform_family(
 
 package vim_base_pkgs
 
-package node['vim']['extra_packages']
+package node['vim']['extra_packages'] unless node['vim']['extra_packages'].empty?

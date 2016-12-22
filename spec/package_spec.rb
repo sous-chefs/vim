@@ -5,12 +5,12 @@ describe 'vim::default' do
     'ubuntu' => {
       '12.04' => ['vim'],
       '14.04' => ['vim'],
-      '16.04' => ['vim']
+      '16.04' => ['vim'],
     },
     'debian' => {
       '7.10' => ['vim'],
-      '8.5' => ['vim']
-    }
+      '8.5' => ['vim'],
+    },
   }
 
   package_checks.each do |platform, versions|

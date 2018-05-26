@@ -11,21 +11,18 @@ verifier:
 platforms:
   - name: centos-6
   - name: centos-7
-  - name: debian-7
-    run_list: apt::default
   - name: debian-8
     run_list: apt::default
-  - name: fedora-26
+  - name: debian-9
+    run_list: apt::default
+  - name: fedora-28
   - name: opensuse-leap-42
   - name: ubuntu-14.04
     run_list: apt::default
   - name: ubuntu-16.04
     run_list: apt::default
-  - name: macosx-10.10
-    run_list: homebrew::default
-    driver:
-      box: chef/macosx-10.10 # private box in Chef's Atlas account
-      provider: vmware_fusion
+  - name: ubuntu-18.04
+    run_list: apt::default
   - name: macosx-10.11
     run_list: homebrew::default
     driver:
@@ -38,7 +35,6 @@ suites:
       - recipe[vim::default]
   - name: source
     excludes:
-      - macosx-10.10
       - macosx-10.11
     run_list:
       - recipe[vim::default]

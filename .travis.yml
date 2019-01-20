@@ -19,12 +19,10 @@ services: docker
 
 env:
   matrix:
-  - INSTANCE=package-ubuntu-1404
   - INSTANCE=package-ubuntu-1604
   - INSTANCE=package-centos-6
   - INSTANCE=package-centos-7
   - INSTANCE=package-debian-8
-  - INSTANCE=source-ubuntu-1404
 #  - INSTANCE=source-ubuntu-1604 fails to find ruby libs during compile
   - INSTANCE=source-centos-6
   - INSTANCE=source-centos-7

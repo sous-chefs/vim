@@ -2,7 +2,7 @@
 # Cookbook:: vim
 # Attributes:: source
 #
-# Copyright:: 2013-2017, Chef Software, Inc.
+# Copyright:: 2013-2019, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ default['vim']['source']['dependencies'] = if platform_family? 'rhel', 'fedora'
                                                    tcl-devel
                                                    bzip2
                                                                                           )
-                                             else # centos 5 and earlier lack lua, luajit, and many of the perl packages found in later releases.  Also installs fail without libselinux-devel
+                                             else # centos 5 and earlier lack lua, luajit, and many of the perl packages found in later releases. Also installs fail without libselinux-devel
                                                %w( ctags
                                                    gcc
                                                    make

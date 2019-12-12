@@ -3,7 +3,6 @@ require 'spec_helper'
 describe 'vim::default' do
   cached(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'ubuntu',
-                             version: '16.04',
                              file_cache_path: '/var/chef/cache') do |node|
       node.normal['vim']['source']['version'] = 'foo_version_1'
     end.converge(described_recipe)

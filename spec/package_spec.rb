@@ -7,8 +7,8 @@ describe 'vim::default' do
       '16.04' => ['vim'],
     },
     'debian' => {
-      '7.11' => ['vim'],
-      '8.7' => ['vim'],
+      '7' => ['vim'],
+      '8' => ['vim'],
     },
   }
 

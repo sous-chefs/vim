@@ -11,4 +11,4 @@ end
 
 source_url 'https://github.com/chef-cookbooks/vim'
 issues_url 'https://github.com/chef-cookbooks/vim/issues'
-chef_version '>= 12.1'
+chef_version '>= 12.15'

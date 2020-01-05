@@ -1,26 +1,17 @@
 require 'spec_helper'
 
 describe 'vim::default' do
-  cached(:chef_run) do
-    ChefSpec::SoloRunner.new(platform: 'ubuntu',
-                             file_cache_path: '/var/chef/cache') do |node|
-      node.normal['vim']['source']['version'] = 'foo_version_1'
-    end.converge(described_recipe)
-  end
-
-  it 'should default to install_method = "package"' do
-    chef_run.converge(described_recipe)
-    expect(chef_run.node['vim']['install_method']).to eq('package')
-  end
+  platform 'ubuntu'
 
   it 'should include the vim::package recipe when install_method = "package"' do
-    chef_run.converge(described_recipe)
-    expect(chef_run).to include_recipe('vim::package')
+    is_expected.to include_recipe('vim::package')
   end
 
-  it 'should include the vim::source recipe when install_method = "source"' do
-    chef_run.node.normal['vim']['install_method'] = 'source'
-    chef_run.converge(described_recipe)
-    expect(chef_run).to include_recipe('vim::source')
+  context 'when install_method = "source"' do
+    override_attributes['vim']['install_method'] = 'source'
+
+    it 'should include the vim::source recipe' do
+      is_expected.to include_recipe('vim::source')
+    end
   end
 end

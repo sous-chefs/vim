@@ -2,7 +2,7 @@
 # Cookbook:: vim
 # Attributes:: source
 #
-# Copyright:: 2013-2019, Chef Software, Inc.
+# Copyright:: 2013-2020, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-default['vim']['source']['version']       = '7.4'
-default['vim']['source']['checksum']      = 'd0f5a6d2c439f02d97fa21bd9121f4c5abb1f6cd8b5a79d3ca82867495734ade'
+default['vim']['source']['version']       = '8.2'
+default['vim']['source']['checksum']      = 'f087f821831b4fece16a0461d574ccd55a8279f64d635510a1e10225966ced3b'
 default['vim']['source']['prefix']        = '/usr/local'
 default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope  --with-features=huge --prefix=#{default['vim']['source']['prefix']}"
 

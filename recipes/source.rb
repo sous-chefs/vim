@@ -22,7 +22,7 @@ source_version = node['vim']['source']['version']
 
 package node['vim']['source']['dependencies']
 
-include_recipe 'vim::source_rhel' if platform?('fedora', 'rhel', 'amazon')
+include_recipe 'vim::source_rhel' if platform_family?('fedora', 'rhel', 'amazon')
 
 remote_file "#{cache_path}/vim-#{source_version}.tar.bz2" do
   source "http://ftp.vim.org/pub/vim/unix/vim-#{source_version}.tar.bz2"

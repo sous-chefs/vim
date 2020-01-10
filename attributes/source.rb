@@ -23,20 +23,38 @@ default['vim']['source']['prefix']        = '/usr/local'
 default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope  --with-features=huge --prefix=#{default['vim']['source']['prefix']}"
 
 default['vim']['source']['dependencies'] = if platform_family?('rhel', 'fedora', 'amazon')
-                                             %w( ctags
-                                                 gcc
-                                                 lua-devel
-                                                 make
-                                                 ncurses-devel
-                                                 perl-devel
-                                                 perl-ExtUtils-CBuilder
-                                                 perl-ExtUtils-Embed
-                                                 perl-ExtUtils-ParseXS
-                                                 python-devel
-                                                 ruby-devel
-                                                 tcl-devel
-                                                 bzip2
-                                                                                        )
+                                             if platform_family?('rhel') && node['platform_version'].to_i >= 8
+                                               %w( ctags
+                                                   gcc
+                                                   lua-libs
+                                                   make
+                                                   ncurses-devel
+                                                   perl-devel
+                                                   perl-ExtUtils-CBuilder
+                                                   perl-ExtUtils-Embed
+                                                   perl-ExtUtils-ParseXS
+                                                   python3-libs
+                                                   ruby-devel
+                                                   tcl-devel
+                                                   bzip2
+                                                                                      )
+                                             else
+                                               %w( ctags
+                                                   gcc
+                                                   lua-devel
+                                                   make
+                                                   ncurses-devel
+                                                   perl-devel
+                                                   perl-ExtUtils-CBuilder
+                                                   perl-ExtUtils-Embed
+                                                   perl-ExtUtils-ParseXS
+                                                   python-devel
+                                                   ruby-devel
+                                                   tcl-devel
+                                                   bzip2
+                                                                                      )
+
+                                             end
                                            elsif platform_family?('suse')
                                              %w( ctags
                                                  gcc

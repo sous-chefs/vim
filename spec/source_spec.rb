@@ -1,22 +1,27 @@
 require 'spec_helper'
 
 describe 'vim::source' do
-  cached(:chef_run) do
-    ChefSpec::SoloRunner.new(platform: 'ubuntu',
-                             file_cache_path: '/var/chef/cache') do |node|
-      node.normal['vim']['source']['version'] = 'foo_version_1'
-    end.converge(described_recipe)
+  context 'on ubuntu' do
+    platform 'ubuntu'
+
+    it { is_expected.to install_package(['exuberant-ctags', 'gcc', 'libncurses5-dev', 'libperl-dev', 'lua5.1', 'make', 'python-dev', 'ruby-dev', 'tcl-dev', 'bzip2']) }
   end
 
-  it 'uses remote_file resource to download vim tar file' do
-    expect(chef_run).to create_remote_file('/var/chef/cache/vim-foo_version_1.tar.bz2')
+  context 'on rhel 7' do
+    platform 'redhat', '7'
+
+    it { is_expected.to install_package(%w(ctags gcc lua-devel make ncurses-devel perl-devel perl-ExtUtils-CBuilder perl-ExtUtils-Embed perl-ExtUtils-ParseXS python-devel ruby-devel tcl-devel bzip2)) }
   end
 
-  it 'uses bash resource to install vim' do
-    expect(chef_run).to run_bash('install_vim')
+  context 'on rhel 8' do
+    platform 'redhat', '8'
+
+    it { is_expected.to install_package(%w(ctags gcc lua-libs make ncurses-devel perl-devel perl-ExtUtils-CBuilder perl-ExtUtils-Embed perl-ExtUtils-ParseXS python3-libs ruby-devel tcl-devel bzip2)) }
   end
 
-  it 'installs source dependencies' do
-    expect(chef_run).to install_package(['exuberant-ctags', 'gcc', 'libncurses5-dev', 'libperl-dev', 'lua5.1', 'make', 'python-dev', 'ruby-dev', 'tcl-dev', 'bzip2'])
+  context 'on sles' do
+    platform 'suse'
+
+    it { is_expected.to install_package(%w(ctags gcc lua-devel make ncurses-devel perl python-devel ruby-devel tcl-devel tar)) }
   end
 end

@@ -2,7 +2,7 @@
 # Cookbook:: vim
 # Attributes:: source
 #
-# Copyright:: 2013-2019, Chef Software, Inc.
+# Copyright:: 2013-2020, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,40 +17,26 @@
 # limitations under the License.
 #
 
-default['vim']['source']['version']       = '7.4'
-default['vim']['source']['checksum']      = 'd0f5a6d2c439f02d97fa21bd9121f4c5abb1f6cd8b5a79d3ca82867495734ade'
+default['vim']['source']['version']       = '8.2'
+default['vim']['source']['checksum']      = 'f087f821831b4fece16a0461d574ccd55a8279f64d635510a1e10225966ced3b'
 default['vim']['source']['prefix']        = '/usr/local'
 default['vim']['source']['configuration'] = "--without-x --enable-pythoninterp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope  --with-features=huge --prefix=#{default['vim']['source']['prefix']}"
 
-default['vim']['source']['dependencies'] = if platform_family? 'rhel', 'fedora'
-                                             if node['platform_version'].to_i >= 6 || platform_family?('suse')
-                                               %w( ctags
-                                                   gcc
-                                                   lua-devel
-                                                   make
-                                                   ncurses-devel
-                                                   perl-devel
-                                                   perl-ExtUtils-CBuilder
-                                                   perl-ExtUtils-Embed
-                                                   perl-ExtUtils-ParseXS
-                                                   python-devel
-                                                   ruby-devel
-                                                   tcl-devel
-                                                   bzip2
-                                                                                          )
-                                             else # centos 5 and earlier lack lua, luajit, and many of the perl packages found in later releases. Also installs fail without libselinux-devel
-                                               %w( ctags
-                                                   gcc
-                                                   make
-                                                   ncurses-devel
-                                                   perl
-                                                   python-devel
-                                                   ruby-devel
-                                                   tcl-devel
-                                                   libselinux-devel
-                                                   bzip2
-                                                                                          )
-                                             end
+default['vim']['source']['dependencies'] = if platform_family?('rhel', 'fedora', 'amazon')
+                                             %w( ctags
+                                                 gcc
+                                                 lua-devel
+                                                 make
+                                                 ncurses-devel
+                                                 perl-devel
+                                                 perl-ExtUtils-CBuilder
+                                                 perl-ExtUtils-Embed
+                                                 perl-ExtUtils-ParseXS
+                                                 python-devel
+                                                 ruby-devel
+                                                 tcl-devel
+                                                 bzip2
+                                                                                        )
                                            elsif platform_family?('suse')
                                              %w( ctags
                                                  gcc

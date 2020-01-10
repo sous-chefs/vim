@@ -2,6 +2,17 @@
 
 This file is used to list changes made in each version of the vim cookbook.
 
+## 2.1.0 (2020-01-10)
+
+- Remove chef 11 compat in metadata - [@tas50](https://github.com/tas50)
+- Add support for SLES / opensuse for source installs - [@tas50](https://github.com/tas50)
+- Resolve Cookstyle 5.8 warnings - [@tas50](https://github.com/tas50)
+- Require Chef 12.15+ - [@tas50](https://github.com/tas50)
+- Remove RHEL 5 support for source installs - [@tas50](https://github.com/tas50)
+- Add Amazon Linux support for source installs - [@tas50](https://github.com/tas50)
+- Update to vim 8.2 for source installs - [@tas50](https://github.com/tas50)
+- Fix source installs on RHEL 8 - [@tas50](https://github.com/tas50)
+
 ## 2.0.2 (2016-08-30)
 
 - Add IBM zLinux to metadata

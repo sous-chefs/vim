@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the vim cookbook.
 
+## Unreleased
+
+- Fix builds
+
 ## 2.1.0 (2020-01-10)
 
 - Remove chef 11 compat in metadata - [@tas50](https://github.com/tas50)

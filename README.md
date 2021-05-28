@@ -23,13 +23,13 @@ Installs or compiles/installs vim.
 
 ## Attributes
 
-### Default recipe attributes:
+### Default recipe attributes
 
 - `node['vim']['extra_packages']` - An array of extra packages related to vim to install (like plugins). Empty array by default.
 
 - `node['vim']['install_method']` - Sets the install method, choose from the various install recipes. This attribute is set to 'package' by default.
 
-### Source recipe attributes:
+### Source recipe attributes
 
 - `node['vim']['source']['version']` - The version of vim to compile, 7.4 by default.
 - `node['vim']['source']['checksum']` - The source file checksum.

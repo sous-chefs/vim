@@ -9,19 +9,17 @@ verifier:
   name: inspec
 
 platforms:
-  - name: centos-6
-  - name: centos-7
-  - name: centos-8
-  - name: debian-9
-    run_list: apt::default
+  - name: almalinux-8
+  - name: amazonlinux-2
   - name: debian-10
-    run_list: apt::default
+  - name: debian-11
+  - name: centos-7
+  - name: centos-stream-8
   - name: fedora-latest
-  - name: opensuse-leap-15
-  - name: ubuntu-16.04
-    run_list: apt::default
   - name: ubuntu-18.04
-    run_list: apt::default
+  - name: ubuntu-20.04
+  - name: rockylinux-8
+  - name: opensuse-leap-15
   - name: macosx-10.12
     run_list: homebrew::default
     driver:

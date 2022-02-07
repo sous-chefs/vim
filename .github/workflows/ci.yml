@@ -28,7 +28,8 @@ jobs:
           - rockylinux-8
           - opensuse-leap-15
         suite:
-          - default
+          - package
+          - source
       fail-fast: false
     steps:
       - name: Check out code

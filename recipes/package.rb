@@ -20,12 +20,4 @@
 # * vim-minimal gives you /bin/vi
 # * vim-enhanced gives you /usr/bin/vim
 #
-vim_base_pkgs = value_for_platform_family(
-  %w(debian arch) => ['vim'],
-  %w(rhel fedora) => %w(vim-minimal vim-enhanced),
-  'default' => ['vim']
-)
-
-package vim_base_pkgs
-
-package node['vim']['extra_packages'] unless node['vim']['extra_packages'].empty?
+vim_package_install

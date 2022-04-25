@@ -17,8 +17,4 @@
 # limitations under the License.
 #
 
-begin
-  include_recipe "vim::#{node['vim']['install_method']}"
-rescue Chef::Exceptions::RecipeNotFound
-  Chef::Log.warn "A vim recipe does not exist for the install method specified: #{node['vim']['install_method']}"
-end
+node['vim']['install_method'] == 'source' ? vim_source_install : vim_package_install

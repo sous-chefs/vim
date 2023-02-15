@@ -3,7 +3,7 @@ maintainer 'Chef Software, Inc.'
 maintainer_email 'cookbooks@chef.io'
 license 'Apache-2.0'
 description 'Installs vim and optional extra packages.'
-version '2.1.6'
+version '2.1.7'
 
 %w(debian ubuntu redhat centos fedora scientific oracle amazon zlinux suse opensuse opensuseleap).each do |os|
   supports os

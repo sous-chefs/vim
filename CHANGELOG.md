@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the vim cookbook.
 
 ## Unreleased
 
+Standardise files with files in sous-chefs/repo-management
+
 ## 2.1.14 - *2023-04-01*
 
 ## 2.1.13 - *2023-04-01*

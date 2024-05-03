@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the vim cookbook.
 
-## Unreleased
+## 2.1.21 - *2024-05-03*
 
 ## 2.1.20 - *2023-09-28*
 

@@ -1,14 +1,25 @@
-name 'vim'
-maintainer 'Chef Software, Inc.'
-maintainer_email 'cookbooks@chef.io'
-license 'Apache-2.0'
-description 'Installs vim and optional extra packages.'
+name             'vim'
+maintainer       'Sous Chefs'
+maintainer_email 'help@sous-chefs.org'
+license          'Apache-2.0'
+description      'Installs vim and optional extra packages.'
+source_url       'https://github.com/chef-cookbooks/vim'
+issues_url       'https://github.com/chef-cookbooks/vim/issues'
+chef_version     '>= 15.3'
+
 version '2.1.22'
 
-%w(debian ubuntu redhat centos fedora scientific oracle amazon zlinux suse opensuse opensuseleap).each do |os|
-  supports os
-end
+supports 'debian'
+supports 'ubuntu'
+supports 'redhat'
+supports 'centos'
+supports 'fedora'
+supports 'scientific'
+supports 'oracle'
+supports 'amazon'
+supports 'zlinux'
+supports 'suse'
+supports 'opensuse'
+supports 'opensuseleap'
 
-source_url 'https://github.com/chef-cookbooks/vim'
-issues_url 'https://github.com/chef-cookbooks/vim/issues'
-chef_version '>= 12.15'
+

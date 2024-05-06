@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the vim cookbook.
 
 ## Unreleased
 
+- Adopt cookbook
+
 ## 2.1.22 - *2024-05-03*
 
 ## 2.1.21 - *2024-05-03*

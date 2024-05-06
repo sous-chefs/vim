@@ -6,6 +6,10 @@ This file is used to list changes made in each version of the vim cookbook.
 
 - Adopt cookbook
 
+## 2.1.22 - *2024-05-03*
+
+## 2.1.21 - *2024-05-03*
+
 ## 2.1.20 - *2023-09-28*
 
 ## 2.1.19 - *2023-09-04*

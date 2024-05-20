@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the vim cookbook.
 
-## Unreleased
+## 3.0.1 - *2024-05-20*
 
 - resolved cookstyle error: metadata.rb:24:1 convention: `Layout/TrailingEmptyLines`
 ## 3.0.0 - *2024-05-06*

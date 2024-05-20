@@ -7,7 +7,7 @@ source_url       'https://github.com/chef-cookbooks/vim'
 issues_url       'https://github.com/chef-cookbooks/vim/issues'
 chef_version     '>= 15.3'
 
-version '3.0.0'
+version '3.0.1'
 
 supports 'debian'
 supports 'ubuntu'

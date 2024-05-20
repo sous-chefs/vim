@@ -21,5 +21,3 @@ supports 'zlinux'
 supports 'suse'
 supports 'opensuse'
 supports 'opensuseleap'
-
-

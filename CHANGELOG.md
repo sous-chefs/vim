@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the vim cookbook.
 
+## [3.0.3](https://github.com/sous-chefs/vim/compare/3.0.2...v3.0.3) (2025-10-16)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#66](https://github.com/sous-chefs/vim/issues/66)) ([cc96096](https://github.com/sous-chefs/vim/commit/cc960960dfeeb5c10ba8f1832692d3474e28f589))
+
 ## 3.0.1 - *2024-05-20*
 
 * resolved cookstyle error: metadata.rb:24:1 convention: `Layout/TrailingEmptyLines`

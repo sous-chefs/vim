@@ -3,6 +3,7 @@ driver:
 
 provisioner:
   name: chef_zero
+  policyfile: Policyfile.rb
   deprecations_as_errors: true
 
 verifier:
@@ -28,9 +29,11 @@ platforms:
 
 suites:
   - name: package
+    named_run_list: package
     run_list:
       - recipe[vim::default]
   - name: source
+    named_run_list: source
     excludes:
       - macosx-10.12
     run_list:

@@ -1,10 +1,10 @@
-name: delivery
+---
+name: ci
 
 "on":
   pull_request:
   push:
-    branches:
-      - main
+    branches: [main]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
@@ -13,43 +13,81 @@ concurrency:
 jobs:
   lint-unit:
     uses: sous-chefs/.github/.github/workflows/lint-unit.yml@9.0.1
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+      statuses: write
 
   integration:
     needs: lint-unit
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
+      fail-fast: false
       matrix:
         os:
           - almalinux-8
           - almalinux-9
           - amazonlinux-2023
-          - debian-11
-          - debian-12
-          - centos-stream-8
           - centos-stream-9
+          - debian-12
           - fedora-latest
-          - ubuntu-2004
+          - opensuse-leap-16
+          - oraclelinux-8
+          - oraclelinux-9
+          - rockylinux-8
+          - rockylinux-9
           - ubuntu-2204
-        suite:
-          - package
-          - source
-      fail-fast: false
+          - ubuntu-2404
+        suite: [default, source]
+    env:
+      KITCHEN_LOCAL_YAML: kitchen.dokken.yml
     steps:
-      - name: Check out code
-        uses: actions/checkout@v7
-      - name: Install Chef
-        uses: actionshub/chef-install@main
-      - name: Dokken
-        uses: actionshub/test-kitchen@main
-        env:
-          CHEF_LICENSE: accept-no-persist
-          KITCHEN_LOCAL_YAML: kitchen.dokken.yml
-        with:
-          suite: ${{ matrix.suite }}
-          os: ${{ matrix.os }}
+      - uses: actions/checkout@v7
+      - name: Install Cinc Workstation
+        uses: sous-chefs/.github/.github/actions/install-workstation@9.0.1
+      - name: Resolve local policy
+        run: chef install Policyfile.rb
+      - name: Test Vim resources
+        run: kitchen test ${{ matrix.suite }}-${{ matrix.os }} --destroy=always
 
-  final:
+  removal:
+    needs: lint-unit
     runs-on: ubuntu-latest
-    needs: integration
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [default, source]
+    env:
+      KITCHEN_LOCAL_YAML: kitchen.dokken.yml
     steps:
-      - run: echo "integration completed"
+      - uses: actions/checkout@v7
+      - name: Install Cinc Workstation
+        uses: sous-chefs/.github/.github/actions/install-workstation@9.0.1
+      - name: Resolve local policy
+        run: chef install Policyfile.rb
+      - name: Create twice and verify
+        run: |
+          kitchen converge ${{ matrix.suite }}-debian-12
+          kitchen verify ${{ matrix.suite }}-debian-12
+      - name: Remove package twice and verify
+        if: matrix.suite == 'default'
+        env:
+          VIM_RUN_LIST: package_remove
+          VIM_VERIFY_PROFILE: package_remove
+        run: |
+          kitchen converge default-debian-12
+          kitchen verify default-debian-12 --test-base-path=test/integration/package_remove
+      - name: Remove source twice and preserve local files
+        if: matrix.suite == 'source'
+        env:
+          VIM_RUN_LIST: source_remove
+          VIM_VERIFY_PROFILE: source_remove
+        run: |
+          kitchen converge source-debian-12
+          kitchen verify source-debian-12 --test-base-path=test/integration/source_remove
+      - name: Destroy isolated instance
+        if: always()
+        run: kitchen destroy ${{ matrix.suite }}-debian-12

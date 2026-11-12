@@ -1,15 +1,19 @@
+# frozen_string_literal: true
+
 name             'vim'
 maintainer       'Sous Chefs'
 maintainer_email 'help@sous-chefs.org'
 license          'Apache-2.0'
 description      'Installs vim and optional extra packages.'
-source_url       'https://github.com/chef-cookbooks/vim'
-issues_url       'https://github.com/chef-cookbooks/vim/issues'
-chef_version     '>= 15.3'
+source_url       'https://github.com/sous-chefs/vim'
+issues_url       'https://github.com/sous-chefs/vim/issues'
+chef_version     '>= 17.5'
 
 version '3.0.3'
 
 supports 'debian'
+supports 'almalinux'
+supports 'rocky'
 supports 'ubuntu'
 supports 'redhat'
 supports 'centos'

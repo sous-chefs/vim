@@ -2,6 +2,24 @@
 
 This file is used to list changes made in each version of the vim cookbook.
 
+## [4.0.0](https://github.com/sous-chefs/vim/compare/v3.0.3...v4.0.0) (2026-11-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate Vim to custom resources ([#81](https://github.com/sous-chefs/vim/issues/81))
+
+### Features
+
+* migrate Vim to custom resources ([#81](https://github.com/sous-chefs/vim/issues/81)) ([0eea4f2](https://github.com/sous-chefs/vim/commit/0eea4f2ff946823a84e49e4ce76cea8f2cec0edf))
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#66](https://github.com/sous-chefs/vim/issues/66)) ([cc96096](https://github.com/sous-chefs/vim/commit/cc960960dfeeb5c10ba8f1832692d3474e28f589))
+* migrate to Policyfile and clean up docs ([#74](https://github.com/sous-chefs/vim/issues/74)) ([898dd65](https://github.com/sous-chefs/vim/commit/898dd65048488c479e55b1663e1f8b4779128aa5))
+* repair workflow actionlint failures ([#71](https://github.com/sous-chefs/vim/issues/71)) ([12b9ca0](https://github.com/sous-chefs/vim/commit/12b9ca007ec28ef97d042e96dcb3dd8deb9e716f))
+
 ## [3.0.3](https://github.com/sous-chefs/vim/compare/3.0.2...v3.0.3) (2025-10-16)
 
 

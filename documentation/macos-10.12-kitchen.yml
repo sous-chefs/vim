@@ -1,0 +1,12 @@
+---
+# Historical unmaintained fixture, not part of the current acceptance matrix.
+# The private box and its old Chef/Homebrew requirements are not verified.
+driver:
+  name: vagrant
+
+platforms:
+  - name: macosx-10.12
+    run_list: homebrew::default
+    driver:
+      box: chef/macosx-10.12
+      provider: vmware_fusion

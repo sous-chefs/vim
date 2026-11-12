@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Reference: http://danger.systems/reference.html
 
 # A pull request summary is required. Add a description of the pull request purpose.

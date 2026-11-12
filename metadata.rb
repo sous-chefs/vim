@@ -9,7 +9,7 @@ source_url       'https://github.com/sous-chefs/vim'
 issues_url       'https://github.com/sous-chefs/vim/issues'
 chef_version     '>= 17.5'
 
-version '3.0.3'
+version '4.0.0'
 
 supports 'debian'
 supports 'almalinux'

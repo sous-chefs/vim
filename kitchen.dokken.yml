@@ -34,7 +34,7 @@ platforms:
       pid_one_command: /bin/systemd
   - name: fedora-latest
     driver:
-      image: dokken/fedora
+      image: dokken/fedora-latest
       pid_one_command: /usr/lib/systemd/systemd
   - name: opensuse-leap-16
     driver:

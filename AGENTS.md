@@ -156,3 +156,22 @@ pull-request write permission and opened/reopened/synchronize events; body
 edits from blacksmith-sh[bot] must not cause actor-based file-protection
 failures. Observe a real default-branch target run after bootstrap before
 merging the replacement release. A missing pre-bootstrap check is not a pass.
+
+The first hosted migration matrix exposed nine setup failures: Fedora used
+nonexistent `dokken/fedora`, and EL source builds lacked Lua headers plus
+EL 9 ctags. Correct Fedora to `dokken/fedora-latest`. The source acceptance
+fixture enables vendor PowerTools 8 / CRB 9 or Oracle CodeReady Builder,
+then EPEL 9 (Oracle vendor EPEL). Production repository policy stays with
+the caller. Vendor evidence: <https://wiki.almalinux.org/repos/AlmaLinux>,
+<https://docs.oracle.com/en/learn/ol-vbox/>, and the EPEL 9 ctags listing at
+<https://packages.fedoraproject.org/pkgs/ctags/ctags/epel-9.html>.
+
+A real EL 8 converge enabled PowerTools but Chef retained package metadata
+from installing dnf-plugins-core and still reported no lua-devel candidate.
+An isolated vendor query confirmed lua-devel 5.3.4-12.el8 in PowerTools.
+Notify native dnf_package :flush_cache immediately when enabling a repository;
+do not use Chef internal cache helpers or change production dependencies.
+Local EL 8 and EL 9 source each passed 11 assertions with second convergence
+0/12; corrected Fedora default passed two assertions with second convergence
+0/2. Oracle Linux 9 also passed 11 assertions with second convergence 0/14.
+All task-owned acceptance instances were destroyed by successful Kitchen runs.

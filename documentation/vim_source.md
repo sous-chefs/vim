@@ -45,3 +45,9 @@ that manifest is missing and never guesses ownership from an existing binary.
 It cannot restore an earlier installation overwritten at the same filename.
 Compiler packages, downloaded sources and build caches remain available, and
 the shared state directory is retained.
+
+On EL 8, enable the vendor PowerTools or CodeReady Builder repository before
+converging. On EL 9, enable CRB or CodeReady Builder and EPEL (Oracle Linux
+uses its vendor EPEL repository). These supply Lua development headers and
+ctags. The resource does not change repository policy; the acceptance fixture
+sets these prerequisites explicitly.

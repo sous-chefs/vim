@@ -175,3 +175,43 @@ Local EL 8 and EL 9 source each passed 11 assertions with second convergence
 0/12; corrected Fedora default passed two assertions with second convergence
 0/2. Oracle Linux 9 also passed 11 assertions with second convergence 0/14.
 All task-owned acceptance instances were destroyed by successful Kitchen runs.
+
+Independent review reproduced an ancestor-symlink escape above prefix and
+forged ownership through a writable state directory. The regression first
+returned current=true for unrelated identical outside files, and forged
+receipts were accepted before the fix. Canonicalise prefix before every
+public helper operation, bind the persisted prefix to that canonical location,
+and validate state/receipt type, ownership and write permissions before trust.
+Reject unsafe pre-existing storage rather than changing its permissions.
+This protects stable paths between Chef operations; it does not claim atomic
+protection against a privileged process changing filesystem paths concurrently.
+
+Receipt paths are canonicalised once and that canonical value is used for
+validation, reads, atomic writes and unlinking. The alias-through-writable-
+ancestor regression reproduced deletion before the fix and now preserves the
+unrelated file even when the lexical link changes after validation. Real
+Debian source acceptance passed 11 install assertions and four separate-run
+removal assertions; both second convergences made zero changes.
+
+The c1d3910 hosted matrix reduced setup failures to an empty AlmaLinux 8
+extras repomd.xml response and Fedora Tcl 9 compiler incompatibility. Fedora
+42 introduced Tcl 9 and maintained Tcl 8 compatibility packages, documented at
+<https://fedoraproject.org/wiki/Releases/42/ChangeSet>. Select tcl8-devel only
+for Fedora 42+, preserving older dependency defaults. Upstream configure
+auto-discovery skips tclsh8.6 and the generic interpreter no longer selects
+the compatibility package, so pass --with-tclsh=tclsh8.6 in the
+Fedora 42+ default configuration. Vendor repoquery confirmed that path. The
+first compatibility-header-only run built successfully but verification
+correctly caught missing +tcl; do not treat compilation as feature acceptance.
+
+Retained Fedora configure logs proved the documented --with-tclsh=PATH
+argument is resolved as a command name by upstream AC_PATH_PROG: an absolute
+path is concatenated with each PATH directory and is not found. Use the
+confirmed command basename tclsh8.6, not an absolute value. This was verified
+against generated src/auto/configure lines 8134-8173 and the real config.log.
+
+Final Fedora compatibility acceptance passed all 11 assertions, including
++python3/+ruby/+tcl/+lua/+perl, with second convergence 0/9. The final
+canonical-receipt helper was loaded for this convergence. Independent review
+re-ran the original ancestor escape and confirmed refusal with the unrelated
+file preserved; no helper findings remain. All 25 unit examples pass.

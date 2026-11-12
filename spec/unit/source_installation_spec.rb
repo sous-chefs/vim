@@ -111,8 +111,103 @@ describe Vim::SourceInstallation do
     expect(File.read(File.join(original_bin, 'vim'))).to eq 'managed Vim binary'
   end
 
+  it 'rejects a replaced ancestor above the prefix before reading or changing outside files' do
+    root = File.dirname(@prefix)
+    parent = File.join(root, 'parent')
+    @prefix = File.join(parent, 'vim')
+    FileUtils.mkdir_p(parent)
+    installer.install_staged(@stage, @prefix, @manifest, 'configuration-a')
+    File.rename(parent, File.join(root, 'original-parent'))
+    outside = File.join(root, 'outside')
+    FileUtils.mkdir_p(File.join(outside, 'vim/bin'))
+    outside_file = File.join(outside, 'vim/bin/vim')
+    File.write(outside_file, 'managed Vim binary')
+    File.symlink('vim', File.join(outside, 'vim/bin/view'))
+    File.symlink(outside, parent)
+
+    expect(installer.installation_current?(@prefix, @manifest, 'configuration-a')).to be false
+    expect { installer.install_staged(@stage, @prefix, @manifest, 'configuration-b') }.to raise_error(ArgumentError, /another prefix/)
+    expect { installer.remove_installation(@prefix, @manifest) }.to raise_error(ArgumentError, /another prefix/)
+    expect(File.read(outside_file)).to eq 'managed Vim binary'
+    expect(File.exist?(@manifest)).to be true
+  end
+
+  it 'rejects a forged receipt in a writable state directory before removing unrelated files' do
+    installer.install_staged(@stage, @prefix, @manifest, 'configuration-a')
+    unrelated = File.join(@prefix, 'bin/unrelated')
+    File.write(unrelated, 'keep this')
+    manifest = JSON.parse(File.read(@manifest))
+    manifest['files'] = { 'bin/unrelated' => { 'type' => 'file', 'sha256' => Digest::SHA256.file(unrelated).hexdigest } }
+    manifest['directories'] = []
+    File.write(@manifest, JSON.generate(manifest))
+    File.chmod(0o777, File.dirname(@manifest))
+
+    expect { installer.remove_installation(@prefix, @manifest) }.to raise_error(ArgumentError, /Untrusted Vim state/)
+    expect(File.read(unrelated)).to eq 'keep this'
+    expect(File.exist?(@manifest)).to be true
+  end
+
+  it 'rejects a symlinked receipt rather than trusting its ownership list' do
+    installer.install_staged(@stage, @prefix, @manifest, 'configuration-a')
+    original = "#{@manifest}.original"
+    File.rename(@manifest, original)
+    File.symlink(original, @manifest)
+    expect { installer.remove_installation(@prefix, @manifest) }.to raise_error(ArgumentError, /Untrusted Vim state/)
+    expect(File.read(File.join(@prefix, 'bin/vim'))).to eq 'managed Vim binary'
+  end
+
+  it 'rejects a symlinked state directory before installing files' do
+    state = File.join(File.dirname(@prefix), 'state')
+    File.symlink(File.dirname(@manifest), state)
+    manifest = File.join(state, 'receipt.json')
+    expect { installer.install_staged(@stage, @prefix, manifest, 'configuration-a') }.to raise_error(ArgumentError, /Untrusted Vim state/)
+    expect(File.exist?(@prefix)).to be false
+  end
+
+  it 'rejects a receipt writable by other users before removing files' do
+    installer.install_staged(@stage, @prefix, @manifest, 'configuration-a')
+    File.chmod(0o666, @manifest)
+    expect { installer.remove_installation(@prefix, @manifest) }.to raise_error(ArgumentError, /Untrusted Vim state/)
+    expect(File.read(File.join(@prefix, 'bin/vim'))).to eq 'managed Vim binary'
+  end
+
+  it 'uses canonical receipt storage when a writable lexical ancestor changes after validation' do
+    root = File.dirname(@prefix)
+    secure = File.join(root, 'secure')
+    outside = File.join(root, 'outside')
+    unsafe = File.join(root, 'unsafe')
+    [secure, outside].each { |path| FileUtils.mkdir_p(File.join(path, 'state'), mode: 0o700) }
+    FileUtils.mkdir_p(unsafe, mode: 0o777)
+    File.chmod(0o777, unsafe)
+    @manifest = File.join(secure, 'state/manifest.json')
+    installer.install_staged(@stage, @prefix, @manifest, 'configuration-a')
+    unrelated = File.join(@prefix, 'bin/unrelated')
+    File.write(unrelated, 'keep this')
+    forged = JSON.parse(File.read(@manifest))
+    forged['files'] = { 'bin/unrelated' => { 'type' => 'file', 'sha256' => Digest::SHA256.file(unrelated).hexdigest } }
+    forged['directories'] = []
+    outside_manifest = File.join(outside, 'state/manifest.json')
+    File.write(outside_manifest, JSON.generate(forged))
+    link = File.join(unsafe, 'link')
+    File.symlink(secure, link)
+    alias_manifest = File.join(link, 'state/manifest.json')
+    allow(installer).to receive(:validate_manifest_trust!).and_wrap_original do |method, path|
+      canonical = method.call(path)
+      if path == alias_manifest
+        File.unlink(link)
+        File.symlink(outside, link)
+      end
+      canonical
+    end
+
+    installer.remove_installation(@prefix, alias_manifest)
+    expect(File.read(unrelated)).to eq 'keep this'
+    expect(File.exist?(File.join(@prefix, 'bin/vim'))).to be false
+    expect(File.exist?(outside_manifest)).to be true
+  end
+
   it 'refuses paths outside the declared prefix in a damaged receipt' do
-    File.write(@manifest, JSON.generate('prefix' => @prefix, 'files' => { '../unrelated' => { 'type' => 'file', 'sha256' => 'fake' } }, 'directories' => []))
+    File.write(@manifest, JSON.generate('prefix' => File.join(File.realpath(File.dirname(@prefix)), File.basename(@prefix)), 'files' => { '../unrelated' => { 'type' => 'file', 'sha256' => 'fake' } }, 'directories' => []))
     expect { installer.remove_installation(@prefix, @manifest) }.to raise_error(/outside the installation prefix/)
   end
 end

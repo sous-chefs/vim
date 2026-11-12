@@ -51,3 +51,15 @@ converging. On EL 9, enable CRB or CodeReady Builder and EPEL (Oracle Linux
 uses its vendor EPEL repository). These supply Lua development headers and
 ctags. The resource does not change repository policy; the acceptance fixture
 sets these prerequisites explicitly.
+
+The manifest binds to the canonical installation path. A changed ancestor
+symlink causes installation and removal to stop. The state directory and
+receipts must belong to the Chef process user and must not be writable by
+group or other users; symlinked state directories and receipts are rejected.
+Ancestors must have trusted ownership and write permissions (root-owned
+sticky temporary directories are allowed). Unsafe existing state is rejected
+without changing permissions or deleting its contents.
+
+Fedora 42 and later use the maintained Tcl 8 compatibility headers and
+interpreter in the default build. Explicit dependency or configuration
+overrides must keep these choices aligned when Tcl support is required.

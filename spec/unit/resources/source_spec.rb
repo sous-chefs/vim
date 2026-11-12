@@ -27,6 +27,21 @@ describe 'vim_source' do
     is_expected.to install_package(['custom-build-dependency'])
   end
 
+  context 'Fedora Tcl compatibility' do
+    platform 'fedora'
+
+    recipe do
+      node.automatic['platform_version'] = '42'
+      vim_source 'editor'
+    end
+
+    it 'uses the vendor Tcl 8 headers required by the Vim interpreter' do
+      expect(chef_run.vim_source('editor').dependencies).to include('tcl8-devel')
+      expect(chef_run.vim_source('editor').dependencies).not_to include('tcl-devel')
+      expect(chef_run.vim_source('editor').configuration).to include('--with-tclsh=tclsh8.6')
+    end
+  end
+
   context 'an unsafe prefix' do
     recipe do
       vim_source 'editor' do

@@ -8,6 +8,8 @@ require 'tempfile'
 module Vim
   module SourceInstallation
     def installation_current?(prefix, manifest_path, fingerprint)
+      prefix = validated_prefix(prefix)
+      manifest_path = validate_manifest_trust!(manifest_path)
       manifest = installation_manifest(prefix, manifest_path)
       current = manifest.fetch('current', [])
       manifest['fingerprint'] == fingerprint && !current.empty? && current.all? do |relative|
@@ -19,6 +21,7 @@ module Vim
 
     def install_staged(stage, prefix, manifest_path, fingerprint)
       prefix = validated_prefix(prefix)
+      manifest_path = validate_manifest_trust!(manifest_path)
       previous = installation_manifest(prefix, manifest_path)
       previous.fetch('files').each do |relative, entry|
         target = installation_target(prefix, relative)
@@ -66,6 +69,8 @@ module Vim
     def remove_installation(prefix, manifest_path)
       return [] unless ::File.exist?(manifest_path)
 
+      prefix = validated_prefix(prefix)
+      manifest_path = validate_manifest_trust!(manifest_path)
       manifest = installation_manifest(prefix, manifest_path)
       retained = []
       manifest.fetch('files').each do |relative, entry|
@@ -100,7 +105,8 @@ module Vim
       raise ArgumentError, 'The filesystem root cannot be a Vim installation prefix' if expanded == '/'
       raise ArgumentError, 'The Vim installation prefix cannot be a symlink' if ::File.symlink?(expanded)
 
-      expanded
+      # Bind receipts to the canonical location, including ancestors above the prefix.
+      ::File.join(::File.realpath(::File.dirname(expanded)), ::File.basename(expanded))
     end
 
     def installation_target(prefix, relative)
@@ -115,6 +121,7 @@ module Vim
 
     def installation_manifest(prefix, manifest_path)
       prefix = validated_prefix(prefix)
+      manifest_path = validate_manifest_trust!(manifest_path)
       return { 'files' => {}, 'directories' => [] } unless ::File.exist?(manifest_path)
 
       manifest = JSON.parse(::File.read(manifest_path))
@@ -123,6 +130,41 @@ module Vim
       manifest.fetch('files').each_key { |relative| installation_target(prefix, relative) }
       manifest.fetch('directories').each { |relative| installation_target(prefix, relative) unless relative == '.' }
       manifest
+    end
+
+    def validate_manifest_trust!(manifest_path)
+      directory = ::File.dirname(::File.expand_path(manifest_path))
+      if ::File.symlink?(directory) || !::File.directory?(directory)
+        raise ArgumentError, 'Untrusted Vim state directory'
+      end
+
+      canonical_directory = ::File.realpath(directory)
+      state = ::File.stat(canonical_directory)
+      unless state.uid == Process.euid && (state.mode & 0o022).zero?
+        raise ArgumentError, 'Untrusted Vim state directory ownership or permissions'
+      end
+
+      ancestor = canonical_directory
+      loop do
+        stat = ::File.stat(ancestor)
+        trusted_owner = [0, Process.euid].include?(stat.uid)
+        sticky = (stat.mode & 0o1000) != 0
+        unless trusted_owner && ((stat.mode & 0o022).zero? || sticky)
+          raise ArgumentError, 'Untrusted Vim state ancestor ownership or permissions'
+        end
+        break if ancestor == '/'
+
+        ancestor = ::File.dirname(ancestor)
+      end
+
+      manifest_path = ::File.join(canonical_directory, ::File.basename(manifest_path))
+      return manifest_path unless ::File.exist?(manifest_path) || ::File.symlink?(manifest_path)
+
+      receipt = ::File.lstat(manifest_path)
+      unless receipt.file? && receipt.uid == Process.euid && (receipt.mode & 0o022).zero?
+        raise ArgumentError, 'Untrusted Vim state receipt type, ownership or permissions'
+      end
+      manifest_path
     end
 
     def installation_parents_safe?(prefix, relative)

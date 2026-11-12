@@ -18,7 +18,11 @@ property :state_dir, String, default: '/var/lib/vim-cookbook',
                              coerce: proc { |value| ::File.expand_path(value) },
                              callbacks: { 'must not be the filesystem root' => proc { |value| value != '/' } }
 property :configuration, [String, Array],
-         default: %w(--without-x --enable-python3interp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope --with-features=huge),
+         default: lazy {
+           flags = %w(--without-x --enable-python3interp --enable-rubyinterp --enable-tclinterp --enable-luainterp --enable-perlinterp --enable-cscope --with-features=huge)
+           flags << '--with-tclsh=tclsh8.6' if platform?('fedora') && node['platform_version'].to_i >= 42
+           flags
+         },
          coerce: proc { |value| value.is_a?(String) ? Shellwords.split(value) : value }
 property :jobs, Integer, default: 2, callbacks: { 'must be positive' => proc(&:positive?) }
 property :dependencies, Array, default: lazy {
@@ -28,7 +32,11 @@ property :dependencies, Array, default: lazy {
   when 'suse'
     %w(gcc make ctags ncurses-devel perl python3-devel ruby-devel tcl-devel lua54 lua54-devel gettext-tools)
   else
-    %w(gcc make ctags ncurses-devel perl-devel perl-ExtUtils-Embed perl-ExtUtils-ParseXS python3-devel ruby-devel tcl-devel lua lua-devel gettext)
+    packages = %w(gcc make ctags ncurses-devel perl-devel perl-ExtUtils-Embed perl-ExtUtils-ParseXS python3-devel ruby-devel tcl-devel lua lua-devel gettext)
+    if platform?('fedora') && node['platform_version'].to_i >= 42
+      packages[packages.index('tcl-devel')] = 'tcl8-devel'
+    end
+    packages
   end
 }
 

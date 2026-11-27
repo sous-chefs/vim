@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   lint-unit:
-    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@9.0.1
+    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@9.0.2
     permissions:
       contents: read
       checks: write
@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install Cinc Workstation
-        uses: sous-chefs/.github/.github/actions/install-workstation@9.0.1
+        uses: sous-chefs/.github/.github/actions/install-workstation@9.0.2
       - name: Resolve local policy
         run: chef install Policyfile.rb
       - name: Test Vim resources
@@ -65,7 +65,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install Cinc Workstation
-        uses: sous-chefs/.github/.github/actions/install-workstation@9.0.1
+        uses: sous-chefs/.github/.github/actions/install-workstation@9.0.2
       - name: Resolve local policy
         run: chef install Policyfile.rb
       - name: Create twice and verify
